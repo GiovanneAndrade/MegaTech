@@ -6,11 +6,10 @@ import { Product } from "./pages/product/Product";
 import { Shopping } from "./components/shopping/Shopping";
 import Orders from "./pages/orders/Orders";
 import MyCart from "./pages/cart/MyCart";
-import  Favorites  from "./pages/favorites/Favorites";
+import Favorites from "./pages/favorites/Favorites";
 import { Contact } from "./pages/contact/Contact";
-
- 
- 
+import { Historic } from "./pages/historic/Historic";
+import { Offers } from "./pages/offers/Offers";
 
 function App() {
   return (
@@ -25,7 +24,8 @@ function App() {
           <Route path="/cart" element={<MyCart />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/contact" element={<Contact />} />
-         
+          <Route path="/historic" element={<Historic />} />
+          <Route path="/offers" element={<Offers />} />
         </Routes>
       </BrowserRouter>
     </>
