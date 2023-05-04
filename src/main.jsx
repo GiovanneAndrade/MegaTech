@@ -9,6 +9,7 @@ import { PaymentProvider } from "./contexts/PaymentContext";
 import { ProductProvider } from "./contexts/ProductContext";
 import { UserProvider } from "./contexts/UserContext";
 import { CategoriesProvider } from "./contexts/Categories";
+import { AnddressProvider } from "./contexts/Anddress";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -19,9 +20,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <PaymentProvider>
               <ProductProvider>
                 <UserProvider>
-                  <CategoriesProvider>
-                    <App />
-                  </CategoriesProvider>
+                  <AnddressProvider>
+                    <CategoriesProvider>
+                      <App />
+                    </CategoriesProvider>
+                  </AnddressProvider>
                 </UserProvider>
               </ProductProvider>
             </PaymentProvider>
