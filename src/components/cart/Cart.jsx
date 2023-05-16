@@ -4,9 +4,10 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../contexts/CartContext";
  
+
 const StyledBadge = styled(Badge)(({ theme }) => ({
-  
   "& .MuiBadge-badge": {
     right: -3,
     top: 13,
@@ -16,11 +17,15 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 export const Cart = () => {
+  const { numberCart } = React.useContext(CartContext);
   const navigate = useNavigate();
   return (
-    <IconButton aria-label="cart"  >
-      <StyledBadge badgeContent={4} color="secondary">
-        <ShoppingCartIcon sx={{color:'#f6ae2d'}} onClick={() => navigate("/cart")}/>
+    <IconButton aria-label="cart">
+      <StyledBadge badgeContent={numberCart} color="secondary">
+        <ShoppingCartIcon
+          sx={{ color: "#f6ae2d" }}
+          onClick={() => navigate("/cart")}
+        />
       </StyledBadge>
     </IconButton>
   );
