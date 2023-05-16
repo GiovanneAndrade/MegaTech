@@ -5,30 +5,15 @@ import Popover from "@mui/material/Popover";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import { useCategorySelection, usePopover } from "../../hooks/UseCategory";
+import { CategoriesContext } from "../../contexts/Categories";
 
 export function Categories() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedCategory, setSelectedCategory] = React.useState("");
-  const allCategories = [
-    "Categoria 1",
-    "Categoria 2",
-    "Categoria 3",
-    "Categoria 4",
-    "Categoria 5",
-    "Categoria 6",
-  ];
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const [selectedCategory, handleCategoryClick] = useCategorySelection("");
+  const { category } = React.useContext(CategoriesContext);
+ 
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    handleClose();
-  };
+  const { anchorEl, handleClick, handleClose } = usePopover();
 
   const open = Boolean(anchorEl);
   const id = open ? "category-popover" : undefined;
@@ -53,13 +38,13 @@ export function Categories() {
         }}
       >
         <List>
-          {allCategories.map((category) => (
+          {category?.map((category) => (
             <ListItemButton
-              key={category}
-              selected={selectedCategory === category}
+              key={category?.id}
+              selected={selectedCategory === category?.name}
               onClick={() => handleCategoryClick(category)}
             >
-              <ListItemText primary={category} />
+              <ListItemText primary={category?.name} />
             </ListItemButton>
           ))}
         </List>
