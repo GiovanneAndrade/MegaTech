@@ -23,7 +23,8 @@ import { Nav } from "../../components/nav/Nav";
 import styled from "styled-components";
 import { Buttons } from "../../components/button/Button";
 import { useNavigate } from "react-router-dom";
- 
+import useShoppingCart from "../../hooks/UseCart";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 400,
@@ -44,55 +45,9 @@ const useStyles = makeStyles((theme) => ({
 function MyCart() {
   const navigate = useNavigate();
   const classes = useStyles();
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      name: "Product A",
-      price: 10,
-      quantity: 1,
-      imageUrl: "https://imgs.casasbahia.com.br/55011374/1xg.jpg?imwidth=292",
-    },
-    {
-      id: 2,
-      name: "Product B",
-      price: 20,
-      quantity: 1,
-      imageUrl: "https://imgs.casasbahia.com.br/55011374/1xg.jpg?imwidth=292",
-    },
-    {
-      id: 3,
-      name: "Product C",
-      price: 15,
-      quantity: 1,
-      imageUrl: "https://imgs.casasbahia.com.br/55011374/1xg.jpg?imwidth=292",
-    },
-  ]);
 
-  const handleDeleteItem = (id) => {
-    setItems(items.filter((item) => item.id !== id));
-  };
-
-  const subtotal = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
-
-  const handleAddItem = (id) => {
-    const newItems = items.map((item) =>
-      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-    );
-    setItems(newItems);
-  };
-
-  const handleRemoveItem = (id) => {
-    const newItems = items.map((item) =>
-      item.id === id
-        ? { ...item, quantity: Math.max(item.quantity - 1, 0) }
-        : item
-    );
-    setItems(newItems);
-  };
-
+  const { items, handleAddItem, handleRemoveItem, handleDeleteItem, subtotal } =
+    useShoppingCart();
   return (
     <>
       <Nav />
@@ -105,7 +60,7 @@ function MyCart() {
               <ListItem key={item.id}>
                 <ListItemAvatar>
                   <img
-                    src={item.imageUrl}
+                    src={item.image}
                     alt={item.name}
                     className={classes.productImage}
                   />
@@ -119,7 +74,7 @@ function MyCart() {
                     <RemoveIcon />
                   </IconButton>
                   {item.quantity}
-                  <NewTypography>
+                  <NewTypography> 
                     <IconButton onClick={() => handleAddItem(item.id)}>
                       <AddIcon />
                     </IconButton>
@@ -138,7 +93,10 @@ function MyCart() {
               <Divider />
               <FinalTypography variant="subtitle1">
                 Subtotal: ${subtotal.toFixed(2)}
-                <Button variant="contained"  onClick={() => navigate("/shopping")}>
+                <Button
+                  variant="contained"
+                  onClick={() => navigate("/shopping")}
+                >
                   Comprar
                 </Button>
               </FinalTypography>
