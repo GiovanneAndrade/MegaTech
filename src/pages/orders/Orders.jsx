@@ -22,16 +22,12 @@ const useStyles = makeStyles(() => ({
 
 function Orders() {
   const classes = useStyles();
-  const [expandedOrderId, setExpandedOrderId] = useState(null);
-
-  const handleOrderClick = (orderId) => {
-    setExpandedOrderId(orderId === expandedOrderId ? null : orderId);
-  };
+  const { expandedOrderId, handleOrderClick } = useExpandedOrderId();
 
   return (
     <>
-    <Nav/>
-      <ContainerHome >
+      <Nav />
+      <ContainerHome>
         <NewList component="nav">
           <Accordion expanded={expandedOrderId === "order1"}>
             <AccordionSummary
@@ -89,9 +85,8 @@ function Orders() {
 export default Orders;
 import styled from "styled-components";
 import { ContainerHome } from "../home/Home";
+import { useExpandedOrderId } from "../../hooks/UseOrders";
 
 export const NewList = styled(List)`
- 
- width: 800px;
+  width: 800px;
 `;
- 
