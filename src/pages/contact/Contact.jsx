@@ -7,7 +7,6 @@ export const Contact = () => {
   return (
     <>
       <Nav />
-      
       <ContainerHome>
         <ContactForm />
       </ContainerHome>
