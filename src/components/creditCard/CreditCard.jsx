@@ -45,7 +45,7 @@ function CreditCard() {
     number: "",
     cardUser: "",
   });
-
+ console.log(cardData.number)
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setCardData((prevState) => ({
@@ -140,7 +140,7 @@ function CreditCard() {
             }))
           }
         />
-        <Buttons text={"Salvar Cartão"} typeButton={null} />
+        <Buttons text={"Salvar Cartão"} cardData={cardData} typeButton={null} />
       </FormWrapper>
     </CreditCardWrapper>
   );
