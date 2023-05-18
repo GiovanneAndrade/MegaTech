@@ -6,71 +6,103 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { IconButton } from "@material-ui/core";
 import { OrderContext } from "../../contexts/OrderContext";
+import { AnddressContext } from "../../contexts/Anddress";
 
-export const CloseOrder = ({ img, quantitys, price, name, id, productSelection }) => {
+export const CloseOrder = ({
+  img,
+  quantitys,
+  price,
+  name,
+  id,
+  productSelection,
+}) => {
   const [checked, setChecked] = React.useState(false);
   const [quantity, setQuantity] = React.useState(quantitys);
-  
-  const { teste,setTeste } = React.useContext(OrderContext);
-   
-  React.useEffect(() => {
 
-    
-      const existingProducts = JSON.parse(localStorage?.getItem("selectedProducts")) || []; 
-      console.log(existingProducts)
-      const foundIndex = productSelection?.findIndex((product) => product.id === id);
-      if (foundIndex >= 0) {
-        setChecked(true);
-      }  
-    
-  }, []);
-  
-  
+  const { isTotal, setIsTotal, isChecked, setIsChecked } =
+    React.useContext(OrderContext);
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-    if (event.target.checked) {
-      const selectedProduct = { id, img, name, price, quantity };
-      const existingProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
-      const index = existingProducts.findIndex((product) => product.id === id);
-      if (index !== -1) {
-        existingProducts[index].quantity += quantity;
-        const updatedProducts = [...existingProducts];
-        localStorage.setItem("selectedProducts", JSON.stringify(updatedProducts));
-      } else {
-        const updatedProducts = [...existingProducts, selectedProduct];
-        localStorage.setItem("selectedProducts", JSON.stringify(updatedProducts));
-      }
-    } else {
-      const existingProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
-      const updatedProducts = existingProducts.filter((product) => product.id !== id);
-      localStorage.setItem("selectedProducts", JSON.stringify(updatedProducts));
-    }
-  };
-  
   React.useEffect(() => {
-    const existingProducts = JSON.parse(localStorage.getItem("selectedProducts")) || []; 
-    const foundIndex = productSelection?.findIndex((product) => product.id === id);
+    const existingProducts =
+      JSON.parse(localStorage?.getItem("selectedProducts")) || [];
+
+    const foundIndex = productSelection?.findIndex(
+      (product) => product.id === id
+    );
     if (foundIndex >= 0) {
       setChecked(true);
     }
   }, []);
-  
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+   
+    if (event.target.checked) {
+      const selectedProduct = {
+        id,
+        img,
+        name,
+        price,
+        quantity,
+        totalPrice: price * quantity,
+      };
+      const existingProducts =
+        JSON.parse(localStorage.getItem("selectedProducts")) || [];
+      const index = existingProducts.findIndex((product) => product.id === id);
+
+      if (index !== -1) {
+        existingProducts[index].quantity += quantity;
+        existingProducts[index].totalPrice += price * quantity;
+        const updatedProducts = [...existingProducts];
+        localStorage.setItem(
+          "selectedProducts",
+          JSON.stringify(updatedProducts)
+        );
+        setIsTotal(updatedProducts);
+      } else {
+        const updatedProducts = [...existingProducts, selectedProduct];
+        localStorage.setItem(
+          "selectedProducts",
+          JSON.stringify(updatedProducts)
+        );
+        setIsTotal(updatedProducts);
+      }
+    } else {
+      const existingProducts =
+        JSON.parse(localStorage.getItem("selectedProducts")) || [];
+      const updatedProducts = existingProducts.filter(
+        (product) => product.id !== id
+      );
+      localStorage.setItem("selectedProducts", JSON.stringify(updatedProducts));
+      setIsTotal(updatedProducts);
+    }
+  };
+
   React.useEffect(() => {
-    const existingProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
+    const existingProducts =
+      JSON.parse(localStorage.getItem("selectedProducts")) || [];
+    const foundIndex = productSelection?.findIndex(
+      (product) => product.id === id
+    );
+    if (foundIndex >= 0) {
+      setChecked(true);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    const existingProducts =
+      JSON.parse(localStorage.getItem("selectedProducts")) || [];
     const index = existingProducts.findIndex((product) => product.id === id);
     if (index !== -1) {
       existingProducts[index].quantity = quantity;
       const updatedProducts = [...existingProducts];
-      setTeste(updatedProducts)
+      setIsTotal(updatedProducts);
       localStorage.setItem("selectedProducts", JSON.stringify(updatedProducts));
     }
   }, [quantity]);
-  
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
-   
   };
 
   const handleDecrement = () => {
