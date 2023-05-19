@@ -5,7 +5,7 @@ import { AppContext } from "../../contexts/AppContext";
 
 export const Buttons = ({ text, typeButton, productOverview, cardData }) => {
   const { handleAddCart, showShopping } = useAddCart();
-  const { newCard, setNewCard, saved , setSaved } = React.useContext(AppContext);
+  const { newCard, setNewCard, saved, setSaved } = React.useContext(AppContext);
   const [invalidData, setInvalidData] = React.useState(true);
 
   React.useEffect(() => {
@@ -21,7 +21,7 @@ export const Buttons = ({ text, typeButton, productOverview, cardData }) => {
     <div>
       <Button
         variant="contained"
-        disabled={invalidData}
+        disabled={text === "Salvar Cartão" ? invalidData : false}
         onClick={() => {
           if (text === "Salvar Cartão") {
             const last4Digits = cardData?.number.slice(-4); // "3456"
@@ -29,8 +29,7 @@ export const Buttons = ({ text, typeButton, productOverview, cardData }) => {
               ...newCard,
               { name: "Credit Card", last4Digits: last4Digits },
             ]);
-           setSaved(true)
-             
+            setSaved(true);
           }
           if (text === "adicionar ao carrinho") {
             handleAddCart(productOverview);
