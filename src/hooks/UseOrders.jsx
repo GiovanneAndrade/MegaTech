@@ -1,4 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { postRequest } from "../services/Services";
+import { OrderContext } from "../contexts/OrderContext";
 
 export const useExpandedOrderId = () => {
   const [expandedOrderId, setExpandedOrderId] = useState(null);
@@ -48,3 +50,22 @@ export const useCancelOrder = () => {
     handleMessageChange,
   };
 };
+
+export function useCreateOrder() {
+  const { errorOrder, setErrorOrder } = React.useContext(OrderContext);
+
+  async function postOrder(finalOrder) {
+  
+    try {
+      const order = await postRequest(finalOrder);
+      console.log(order.data);
+      return false;
+    } catch (error) {
+      console.log(error.response.data.message);
+      alert(error.response.status);
+      return true;
+    }
+  }
+
+  return { postOrder, errorOrder };
+}
