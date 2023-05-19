@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 function Favotites() {
   const classes = useStyles();
   const { favorities } = React.useContext(FavoritesContext);
-
+ 
   return (
     <>
       <Nav />
@@ -32,10 +32,12 @@ function Favotites() {
             <div className="newDiv">
               <Products
                 name={product?.name}
+                id={product?.id}
                 avaliações={product?.price}
                 image={product?.image}
                 description={product?.description}
                 quantity={product?.quantity}
+                isFavorite={true}
               />
             </div>
           ))}
