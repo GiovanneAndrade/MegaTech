@@ -9,12 +9,16 @@ function useShoppingCart() {
   if (existingCart) {
     initialItemsState = JSON.parse(existingCart);
   }
-
-  const [items, setItems] = useState(initialItemsState);
+  const { numberCart, setNumberCart } = React.useContext(CartContext);
+   const [items, setItems] = useState(initialItemsState);
 
   const handleDeleteItem = (id) => {
-    setItems(items.filter((item) => item.id !== id));
+    const newItems = items.filter((item) => item.id !== id);
+    setItems(newItems);
+    setNumberCart(numberCart - 1)
+    localStorage.setItem("megaTechCart", JSON.stringify(newItems));
   };
+  
 
   const subtotal = items.reduce(
     (acc, item) => acc + Number(item.price) * item.quantity,
@@ -26,6 +30,7 @@ function useShoppingCart() {
       item.id === id ? { ...item, quantity: Number(item.quantity) + 1 } : item
     );
     setItems(newItems);
+    localStorage.setItem("megaTechCart", JSON.stringify(newItems));
   };
 
   const handleRemoveItem = (id) => {
@@ -35,6 +40,7 @@ function useShoppingCart() {
         : item
     );
     setItems(newItems);
+    localStorage.setItem("megaTechCart", JSON.stringify(newItems));
   };
 
   return {
@@ -53,8 +59,6 @@ export const useAddCart = () => {
   const navigate = useNavigate();
 
   function handleAddCart(productOverview) {
-    setNumberCart(Number(numberCart) + 1);
-  
     const existingCart = localStorage.getItem("megaTechCart");
     if (existingCart) {
       const cartArray = JSON.parse(existingCart);
@@ -65,11 +69,14 @@ export const useAddCart = () => {
         cartArray.push(productOverview);
       }
       localStorage.setItem("megaTechCart", JSON.stringify(cartArray));
+      setNumberCart(Number(numberCart) + productOverview.quantity);
     } else {
       const cartArray = [productOverview];
       localStorage.setItem("megaTechCart", JSON.stringify(cartArray));
+      setNumberCart(Number(numberCart) + productOverview.quantity);
     }
   }
+  
   
   
 
