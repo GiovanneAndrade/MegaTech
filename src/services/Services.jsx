@@ -17,6 +17,24 @@ function getCategories() {
 function getFavorities() {
   return axios.get(`${APIprefix}/favorities/1`);
 }
+
+function postFavorities(id) {
+
+  const Favorities = {
+    productId: [{ id: id }],
+    userId: 1,
+  };
+  return axios.post(`${APIprefix}/favorities`, Favorities);
+}
+
+function postRemoveFavorities(id) {
+  const Favorities = {
+    productId: [{ id: id }],
+    userId: 1,
+  };
+  return axios.put(`${APIprefix}/favorities`, Favorities);
+}
+
 function getAddress() {
   return axios.get(`${APIprefix}/address`);
 }
