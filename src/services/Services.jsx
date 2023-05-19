@@ -60,12 +60,37 @@ function updateMyAddress(currentAddress, previousAddress) {
   return axios.put(`${APIprefix}/address/${currentAddress}/${previousAddress}`);
 }
 
+function postRequest(finalOrder) {
+  const Product = finalOrder[0].products.map((product) => ({ id: product.id }));
+  const addressId = finalOrder[1].address.id;
+  const total = finalOrder[2].total;
+
+  const paymentsInformation = JSON.stringify({
+    ...finalOrder[4],
+    ...finalOrder[3].card,
+  });
+  const data = {
+    total: total,
+    message: paymentsInformation,
+    addressId: 12,
+    userId: 1,
+    products: Product,
+  };
+  console.log(data);
+
+  return axios.post(`${APIprefix}/request`, data);
+}
+
 export {
   getCategories,
   getProductsHot,
   getProducts,
   getFavorities,
+  postFavorities,
   getAddress,
+  postAnddress,
   deleteMyAddress,
-  updateMyAddress
+  updateMyAddress,
+  postRequest,
+  postRemoveFavorities
 };
