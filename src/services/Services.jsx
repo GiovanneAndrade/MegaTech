@@ -38,6 +38,21 @@ function postRemoveFavorities(id) {
 function getAddress() {
   return axios.get(`${APIprefix}/address`);
 }
+function postAnddress(myAnddress) {
+  const data = {
+    cep: Number(myAnddress.cep),
+    address: "",
+    name_recipient: myAnddress.name_recipient,
+    number: 27,
+    district: myAnddress.bairro,
+    city: myAnddress.city,
+    uf: myAnddress.uf,
+    complement: "",
+    userId: 1,
+  };
+
+  return axios.post(`${APIprefix}/address`, data);
+}
 function deleteMyAddress(id) {
   return axios.delete(`${APIprefix}/address/${id}`);
 }
