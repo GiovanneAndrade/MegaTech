@@ -52,13 +52,19 @@ export const useCancelOrder = () => {
 };
 
 export function useCreateOrder() {
-  const { errorOrder, setErrorOrder } = React.useContext(OrderContext);
+  const { errorOrder, setErrorOrder, order, setOrder, setNewOrder, newOrder } =
+    React.useContext(OrderContext);
 
   async function postOrder(finalOrder) {
-  
     try {
-      const order = await postRequest(finalOrder);
-      console.log(order.data);
+      const myOrder = await postRequest(finalOrder);
+      console.log(myOrder.data);
+      if (!newOrder) {
+        setNewOrder(true);
+      }else{
+        setNewOrder(false);
+      }
+
       return false;
     } catch (error) {
       console.log(error.response.data.message);
