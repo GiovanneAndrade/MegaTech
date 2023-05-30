@@ -5,17 +5,32 @@ import styled from "styled-components";
 import { addDays, format } from "date-fns";
 import CancelOrder from "./CancelOrder";
 import { OrderContext } from "../../contexts/OrderContext";
+import Lottie from "react-lottie";
+import animationData from "../../assets/images/data.json";
 
 const OrderComplete = () => {
   const deliveryDate = addDays(new Date(), 15);
   const formattedDeliveryDate = format(deliveryDate, "dd/MM/yyyy");
   const { finalOrder, setFinalOrder } = React.useContext(OrderContext);
 
- const total = finalOrder?.map(f=>f?.total)
- const address = finalOrder?.filter(f=>f?.address)
- const card = finalOrder?.filter(f=>f?.card)
- const   installmentNumber = finalOrder?.filter(f=>f?.installmentNumber)
- console.log(installmentNumber[0].installmentNumber)
+  const total = finalOrder?.map((f) => f?.total);
+  const address = finalOrder?.filter((f) => f?.address);
+  const card = finalOrder?.filter((f) => f?.card);
+  const installmentNumber = finalOrder?.filter((f) => f?.installmentNumber);
+
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  const lottieStyle = {
+    width: "100px",
+    height: "100px",
+  };
   return (
     <OrderCompleteContainer>
       <div className="container">
@@ -31,11 +46,7 @@ const OrderComplete = () => {
           }}
         >
           <Grid item container justify="center">
-            <CheckCircleIcon
-              color="primary"
-              fontSize="large"
-              style={{ color: "green", fontSize: "100px" }}
-            />
+            <Lottie options={defaultOptions} style={lottieStyle} />
           </Grid>
 
           <Grid container item spacing={2}>
@@ -52,15 +63,19 @@ const OrderComplete = () => {
               </Grid>
 
               <Grid item>
-               
-                  <Typography  variant="h6">${total}</Typography>
-               
-                
+                <Typography variant="h6">${total}</Typography>
               </Grid>
             </Grid>
             <Grid item>
               <Typography variant="body1">Entregar em:</Typography>
-              <Typography variant="body2"> <strong>endereço:</strong>{address[0].address?.address},<br /> <strong>cidade:</strong> {address[0].address?.city}, <br /> <strong>numero:</strong>:{address[0].address?.number}, <br /> <strong>nome:</strong>{address[0].address?.name_recipient}</Typography>
+              <Typography variant="body2">
+                {" "}
+                <strong>endereço:</strong>
+                {address[0].address?.address},<br /> <strong>cidade:</strong>{" "}
+                {address[0].address?.city}, <br /> <strong>numero:</strong>:
+                {address[0].address?.number}, <br /> <strong>nome:</strong>
+                {address[0].address?.name_recipient}
+              </Typography>
             </Grid>
             <Grid item>
               <Typography variant="body1">Entrega até:</Typography>
@@ -68,11 +83,15 @@ const OrderComplete = () => {
             </Grid>
             <Grid item>
               <Typography variant="body1">Cartão utilizado:</Typography>
-              <Typography variant="body2">credito **** {card[0]?.card?.last4Digits}</Typography>
+              <Typography variant="body2">
+                credito **** {card[0]?.card?.last4Digits}
+              </Typography>
             </Grid>
             <Grid item>
               <Typography variant="body1">Parcelas:</Typography>
-              <Typography variant="body2">{installmentNumber[0]?.installmentNumber}x</Typography>
+              <Typography variant="body2">
+                {installmentNumber[0]?.installmentNumber}x
+              </Typography>
             </Grid>
             <Grid item>
               <Typography variant="body1">Numero do Pedido:</Typography>

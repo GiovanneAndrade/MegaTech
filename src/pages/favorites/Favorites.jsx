@@ -7,9 +7,11 @@ import {
 import styled from "styled-components";
 import { ContainerHome, Conteiner } from "../home/Home";
 import { Products } from "../../components/products/Products";
-
+import pare from "../../assets/images/pare.gif";
 import React from "react";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
+import { getFromLocalStorage } from "../../localStorage/LocalStorage";
+import { NewContainerHome } from "../historic/Historic";
 const useStyles = makeStyles({
   root: {
     maxWidth: 240,
@@ -22,26 +24,34 @@ const useStyles = makeStyles({
 function Favotites() {
   const classes = useStyles();
   const { favorities } = React.useContext(FavoritesContext);
- 
+
+  const myToken = getFromLocalStorage("megaTechAuth");
   return (
     <>
       <Nav />
       <ContainerHome>
-        <NewConteiner>
-          {favorities?.map((product) => (
-            <div className="newDiv">
-              <Products
-                name={product?.name}
-                id={product?.id}
-                avaliações={product?.price}
-                image={product?.image}
-                description={product?.description}
-                quantity={product?.quantity}
-                isFavorite={true}
-              />
-            </div>
-          ))}
-        </NewConteiner>
+        {myToken ? (
+          <NewConteiner>
+            {favorities?.map((product) => (
+              <div className="newDiv">
+                <Products
+                  name={product?.name}
+                  id={product?.id}
+                  avaliações={product?.price}
+                  image={product?.image}
+                  description={product?.description}
+                  quantity={product?.quantity}
+                  isFavorite={true}
+                />
+              </div>
+            ))}
+          </NewConteiner>
+        ) : (
+          <NewContainerHome>
+            Faça Login Para Prosseguir
+            <img src={pare} />
+          </NewContainerHome>
+        )}
       </ContainerHome>
     </>
   );
@@ -62,3 +72,4 @@ export const NewConteiner = styled(Conteiner)`
     width: 200px;
   }
 `;
+ 
