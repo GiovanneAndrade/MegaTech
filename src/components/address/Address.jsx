@@ -42,9 +42,7 @@ export function AddAnddress() {
     }));
   }
 
-  function handleBuscardistrict() {
-    buscardistrict(myAnddress.cep);
-  }
+ 
   function handleBuscardistrict() {
     buscardistrict(myAnddress.cep);
   }
