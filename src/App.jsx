@@ -10,6 +10,8 @@ import Favorites from "./pages/favorites/Favorites";
 import { Contact } from "./pages/contact/Contact";
 import { Historic } from "./pages/historic/Historic";
 import { Offers } from "./pages/offers/Offers";
+import { Signup } from "./pages/signup/Signup";
+import { Signin } from "./pages/signin/Signin";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
           <Route path="/shopping" element={<Shopping />} />
