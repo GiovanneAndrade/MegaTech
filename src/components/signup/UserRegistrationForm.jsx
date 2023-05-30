@@ -22,6 +22,7 @@ import TextMask from "react-text-mask";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { UseUser } from "../../hooks/UseUser";
 
 const UserRegistrationForm = () => {
   const [name, setName] = useState("");
@@ -43,9 +44,11 @@ const UserRegistrationForm = () => {
   const navigate = useNavigate();
   const signup = {
     name,
+    cpf,
     email,
     password,
     confirmPassword,
+    phone: 1243758689,
   };
   const validateForm = () => {
     if (
@@ -110,15 +113,26 @@ const UserRegistrationForm = () => {
       setPasswordMatch(true);
     }
   };
-
-  const handleSubmit = (event) => {
+  const { createUser } = UseUser();
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    
+    const hasError = await createUser(signup);
+    if (hasError) {
+      toast.error("Erro ao cadastrar usuário", {
+        className: "custom-toast",
+      });
+      return;
+    }
     toast.success("Cadastro realizado com sucesso!", {
       className: "custom-toast",
     });
-    navigate("/signin");
+    
+    setTimeout(() => {
+      navigate("/signin");
+    }, 1000); 
   };
+  
+  
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -181,7 +195,6 @@ const UserRegistrationForm = () => {
         hideProgressBar={false}
         closeOnClick
         pauseOnHover
-        
       />
       <Grid item xs={12} sm={6} md={4}>
         <Typography variant="h5" align="center" gutterBottom>
@@ -333,8 +346,8 @@ export const Form = styled.form`
 export const GridContainer = styled(Grid)`
   display: flex;
   margin-top: 70px;
-  .custom-toast{
-    background-color:#fff;
+  .custom-toast {
+    background-color: #fff;
     color: #000;
     font-size: 16px;
   }
