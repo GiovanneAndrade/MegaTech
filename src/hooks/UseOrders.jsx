@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { postRequest } from "../services/Services";
 import { OrderContext } from "../contexts/OrderContext";
+import { getFromLocalStorage } from "../localStorage/LocalStorage";
 
 export const useExpandedOrderId = () => {
   const [expandedOrderId, setExpandedOrderId] = useState(null);
@@ -54,10 +55,10 @@ export const useCancelOrder = () => {
 export function useCreateOrder() {
   const { errorOrder, setErrorOrder, order, setOrder, setNewOrder, newOrder } =
     React.useContext(OrderContext);
-
+    const myToken = getFromLocalStorage("megaTechAuth");
   async function postOrder(finalOrder) {
     try {
-      const myOrder = await postRequest(finalOrder);
+      const myOrder = await postRequest(finalOrder, myToken?.id);
       console.log(myOrder.data);
       if (!newOrder) {
         setNewOrder(true);

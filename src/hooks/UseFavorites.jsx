@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { postFavorities, postRemoveFavorities } from "../services/Services";
 import { FavoritesContext } from "../contexts/FavoritesContext";
+import { getFromLocalStorage } from "../localStorage/LocalStorage";
  
 
 export function useCreateFavorites() {
   const { favorities, setFavorities, myFavorities, setMyFavorities  } = React.useContext(FavoritesContext);
-
+  const myToken = getFromLocalStorage("megaTechAuth");
+ 
   async function createFavorites(id) {
   
     try {
-      const myFavorites = await postFavorities(id);
+      const myFavorites = await postFavorities(id, myToken?.id);
       if (myFavorites?.data) {
         setFavorities([...favorities, myFavorites.data]);
       }
@@ -22,9 +24,9 @@ export function useCreateFavorites() {
   }
 
   async function removeFavorites(id) {
- 
+    const myToken = getFromLocalStorage("megaTechAuth");
     try {
-      const myFavorites = await postRemoveFavorities(id);
+      const myFavorites = await postRemoveFavorities(id, myToken?.id);
       const newFavorite = favorities.filter(f => f.id !== id);
        if (myFavorites.data) {
         setFavorities(newFavorite)
