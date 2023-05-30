@@ -1,6 +1,17 @@
 import axios from "axios";
+import { getFromLocalStorage } from "../localStorage/LocalStorage";
 
 const APIprefix = "http://localhost:5000";
+
+
+const tokenLocal = getFromLocalStorage('megaTechAuth')
+ 
+const config = {
+  headers: {
+    Authorization: `Bearer ${tokenLocal?.token}`,
+  },
+};
+
 
 function getProductsHot() {
   return axios.get(`${APIprefix}/product/hot`);
@@ -15,30 +26,30 @@ function getCategories() {
 }
 
 function getFavorities() {
-  return axios.get(`${APIprefix}/favorities/1`);
+  
+  return axios.get(`${APIprefix}/favorities`, config);
 }
 
-function postFavorities(id) {
-
+function postFavorities(id, userId) {
   const Favorities = {
     productId: [{ id: id }],
-    userId: 1,
+    userId: Number(userId),
   };
-  return axios.post(`${APIprefix}/favorities`, Favorities);
+  return axios.post(`${APIprefix}/favorities`, Favorities, config);
 }
 
-function postRemoveFavorities(id) {
+function postRemoveFavorities(id, userId) {
   const Favorities = {
     productId: [{ id: id }],
-    userId: 1,
+    userId: Number(userId),
   };
-  return axios.put(`${APIprefix}/favorities`, Favorities);
+  return axios.put(`${APIprefix}/favorities`, Favorities, config);
 }
 
 function getAddress() {
-  return axios.get(`${APIprefix}/address`);
+  return axios.get(`${APIprefix}/address`, config);
 }
-function postAnddress(myAnddress) {
+function postAnddress(myAnddress, userId) {
   const data = {
     cep: Number(myAnddress.cep),
     address: "",
@@ -48,23 +59,42 @@ function postAnddress(myAnddress) {
     city: myAnddress.city,
     uf: myAnddress.uf,
     complement: "",
-    userId: 1,
+    userId: Number(userId),
   };
 
-  return axios.post(`${APIprefix}/address`, data);
+  return axios.post(`${APIprefix}/address`, data, config);
 }
 function deleteMyAddress(id) {
-  return axios.delete(`${APIprefix}/address/${id}`);
+  return axios.delete(`${APIprefix}/address/${id}`, config);
 }
 function updateMyAddress(currentAddress, previousAddress) {
-  return axios.put(`${APIprefix}/address/${currentAddress}/${previousAddress}`);
+  return axios.put(`${APIprefix}/address/${currentAddress}/${previousAddress}`, config);
 }
 
 function getRequests() {
-  return axios.get(`${APIprefix}/request`);
+  return axios.get(`${APIprefix}/request`, config);
 }
 
-function postRequest(finalOrder) {
+function postUser(signup) {
+  const data = {
+    name: "newUser",
+    email: "newUser@newUser.com",
+    password: "gege",
+    cpf: "12348948784",
+    phone: 1243758689,
+  };
+  console.log(signup)
+  return axios.post(`${APIprefix}/signup`, signup);
+}
+
+function postSignin(login) {
+
+  console.log(login)
+  return axios.post(`${APIprefix}/signin`, login);
+}
+
+
+function postRequest(finalOrder, userId) {
   const Product = finalOrder[0].products.map((product) => ({ id: product.id }));
   const addressId = finalOrder[1].address.id;
   const total = finalOrder[2].total;
@@ -76,13 +106,12 @@ function postRequest(finalOrder) {
   const data = {
     total: total,
     message: paymentsInformation,
-    addressId: 12,
-    userId: 1,
+    addressId: addressId,
+    userId: Number(userId),
     products: Product,
   };
 
-
-  return axios.post(`${APIprefix}/request`, data);
+  return axios.post(`${APIprefix}/request`, data, config);
 }
 
 export {
@@ -97,5 +126,7 @@ export {
   updateMyAddress,
   postRequest,
   postRemoveFavorities,
-  getRequests
+  getRequests,
+  postUser,
+  postSignin
 };
