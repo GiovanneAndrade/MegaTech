@@ -12,6 +12,7 @@ import { Historic } from "./pages/historic/Historic";
 import { Offers } from "./pages/offers/Offers";
 import { Signup } from "./pages/signup/Signup";
 import { Signin } from "./pages/signin/Signin";
+import { User } from "./pages/user/User";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/user" element={<User />} />
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
           <Route path="/shopping" element={<Shopping />} />
