@@ -14,7 +14,7 @@ export const Contact = () => {
       <Nav />
       <ContainerHome>
         {myToken ? (
-          <ContactForm />
+          <ContactForm help={false}/>
         ) : (
           <NewContainerHome>
             Faça Login Para Prosseguir
