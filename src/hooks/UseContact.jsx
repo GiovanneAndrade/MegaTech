@@ -26,9 +26,17 @@ export const useHandleSubmit = () => {
 
     setFormSubmitted(true);
   };
-
+  function newContact(){
+    setFormSubmitted(false)
+    setName('')
+    setEmail('')
+    setMessage('')
+    setSelectedOrder('')
+    setSelectedReason('')
+  }
   return {
     handleSubmit,
+    newContact,
     name,
     setName,
     nameError,
@@ -42,6 +50,7 @@ export const useHandleSubmit = () => {
     messageError,
     setMessageError,
     formSubmitted,
+    setFormSubmitted,
     selectedOrder,
     setSelectedOrder,
     selectedOrderError,
