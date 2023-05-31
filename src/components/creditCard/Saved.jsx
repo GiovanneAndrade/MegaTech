@@ -3,37 +3,22 @@ import styled from "styled-components";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { Button } from "@mui/material";
 import { AppContext } from "../../contexts/AppContext";
-import Lottie from 'react-lottie';
-import animationData from '../../assets/images/card.json';
+import Lottie from "react-lottie";
+import animationData from "../../assets/images/card.json";
+import Success from "../lottie/Success";
 export const Saved = () => {
-  const { newCard, setNewCard, showCard, setShowCard, saved , setSaved  } =
-  React.useContext(AppContext);
+  const { newCard, setNewCard, showCard, setShowCard, saved, setSaved } =
+    React.useContext(AppContext);
 
-  function addCard(){
-    setSaved(false)
-  }
-
-  const defaultOptions = {
-    loop: false,
-    autoplay: true, 
-
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
-  };
-  const lottieStyle = {
-    width: "100px",  
-    height: "100px", 
+  function addCard() {
+    setSaved(false);
   }
 
   return (
     <SavedContainer>
-     <Lottie options={defaultOptions} style={lottieStyle} />
-      cartão salvo com sucesso
-      <Button onClick={addCard}>
-        adicionar novo cartão
-      </Button>
+     <Success message={'cartão salvo com sucesso'} icon={animationData}/>
+      
+      <Button onClick={addCard}>adicionar novo cartão</Button>
     </SavedContainer>
   );
 };
