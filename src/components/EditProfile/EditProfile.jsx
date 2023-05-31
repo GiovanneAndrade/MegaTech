@@ -98,13 +98,15 @@ export const EditProfileContainer = styled(NewContainerHome)`
   background: #fff;
   width: 40%;
   // border-radius: 0;
+  //height: 40%;
+  
   .selected {
     height: 50px;
     border-right: solid 5px #f6ae2d;
     display: flex;
     text-align: center;
     transition: height 0.7s ease, border-right 0.3s ease;
-}
+  }
   flex-direction: row;
   .menuLeft {
     width: 30%;
@@ -124,14 +126,14 @@ export const EditProfileContainer = styled(NewContainerHome)`
   }
   .menuRight {
     width: 70%;
-    min-height: 100%;
+    height: 100%;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
+   // justify-content: center;
     flex-direction: column;
-    padding: 30px;
+    padding: 30px 30px 30px 30px;
     //background: #f6ae2d;
   }
   li {
@@ -141,24 +143,24 @@ export const EditProfileContainer = styled(NewContainerHome)`
     padding: 10px 10px 0 40px;
     width: 100%;
     gap: 15px;
-    height: 40px;  /* Or whatever the unselected height should be */
+    height: 40px; /* Or whatever the unselected height should be */
     border-right: solid 5px transparent; /* To ensure smooth transition */
     transition: height 0.7s ease, border-right 0.3s ease;
-}
+  }
   .icon {
     color: #f6ae2d !important;
   }
   .menuRightTop {
     width: 100%;
-    // height: 100px;
+    
     display: flex;
     align-items: center;
     justify-content: center;
     border-top-right-radius: 10px;
     font-size: 20px;
     // margin-bottom:20px;
-    padding: 10px 0 30px 0;
-    //background:#000;
+    padding: 0 0 20px 0;
+   // background:#000;
   }
   .menuRightBotton {
     width: 100%;
