@@ -27,7 +27,7 @@ export const ImageContainer = styled.div`
   border-radius: 5px 5px 5px 5px;
   img {
     padding: 10px;
-    width: 130px;
+    max-width: 130px;
   }
 `;
 export const InformationProducts = styled(ImageContainer)`
@@ -35,7 +35,7 @@ export const InformationProducts = styled(ImageContainer)`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
-  
+
   padding: 10px;
   h1 {
     font-size: 15px;

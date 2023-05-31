@@ -6,15 +6,20 @@ export const FavoritesContext = React.createContext({});
 export const FavoritesProvider = (props) => {
   const [favorities, setFavorities] = useState([]);
   const [myFavorities, setMyFavorities] = useState();
- 
+  const [token, setToken] = useState();
   useEffect(() => {
     const favorities = getFavorities();
     favorities
       .then((response) => {
+        console.log(response.data)
         setFavorities(response.data);
       })
-      .catch(() => {
-        console.log("error");
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data.message);
+        } else {
+          console.log("Erro na requisição:", error.message);
+        }
       });
   }, []);
 
