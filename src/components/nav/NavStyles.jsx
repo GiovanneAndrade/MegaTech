@@ -19,8 +19,13 @@ export const NavContainer = styled.nav`
 export const MenuLeft = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 
+  div {
+    display: flex;
+    align-items: center;
+    //justify-content: center;
+    cursor: pointer;
+  }
   @media screen and (max-width: 768px) {
     margin-top: -20px;
     gap: 0;
@@ -72,12 +77,9 @@ export const NewMenuCentral = styled(MenuCentral)`
   }
 `;
 
-export const Logo = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #f6ae2d;
+export const Logo = styled.img`
+  width: 200px;
   cursor: pointer;
-
   @media screen and (max-width: 768px) {
     margin-bottom: 0.5rem;
   }
@@ -87,7 +89,12 @@ export const Menu = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
   ul {
     display: flex;
     align-items: center;
