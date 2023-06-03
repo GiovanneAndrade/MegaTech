@@ -88,9 +88,11 @@ function postUser(signup) {
 }
 
 function postSignin(login) {
-
-  console.log(login)
   return axios.post(`${APIprefix}/signin`, login);
+}
+
+function getSearch(searchTerm) {
+  return axios.get(`${APIprefix}/search?term=${searchTerm}`);
 }
 
 
@@ -128,5 +130,6 @@ export {
   postRemoveFavorities,
   getRequests,
   postUser,
-  postSignin
+  postSignin,
+  getSearch
 };
