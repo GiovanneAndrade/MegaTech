@@ -2,18 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import { useCategorySelection } from "../../hooks/UseCategory";
 import { CategoriesContext } from "../../contexts/Categories";
-export const Titles = ({ titles }) => {
+import { ProductContext } from "../../contexts/ProductContext";
+export const Titles = ({ titles, isHome }) => {
   const { showCategory, setShowCategory, isCategory, setIsCategory } =
     React.useContext(CategoriesContext);
   const [selectedCategory, handleCategoryClick] = useCategorySelection();
-
-  function teste(titles) {
-    handleCategoryClick(titles);
+  const { productOverview, setProductOverview } =
+    React.useContext(ProductContext);
+  function newTitle(titles, isHome) {
+    if (isHome) {
+      handleCategoryClick(titles);
+    }
+    return;
   }
 
   return (
-    <Title onClick={() => teste(titles)}>
-      {!titles?.name ? titles : titles?.name}
+    <Title onClick={() => newTitle(titles, isHome)}>
+      <h1> {!titles?.name ? titles : titles?.name}</h1>
     </Title>
   );
 };
