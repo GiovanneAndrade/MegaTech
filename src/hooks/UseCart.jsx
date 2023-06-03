@@ -64,39 +64,62 @@ export const useAddCart = () => {
       const cartArray = JSON.parse(existingCart);
       const productIndex = cartArray.findIndex(item => item.id === productOverview.id);
       if (productIndex >= 0) {
+        // O produto já está no carrinho, apenas incrementa a quantidade
         cartArray[productIndex].quantity += productOverview.quantity;
+        localStorage.setItem("megaTechCart", JSON.stringify(cartArray));
+        // Não incrementa numberCart
       } else {
+        // O produto não está no carrinho, adiciona o produto
         cartArray.push(productOverview);
+        localStorage.setItem("megaTechCart", JSON.stringify(cartArray));
+        setNumberCart(Number(numberCart) + 1); // Adiciona 1 ao numberCart (em vez de quantity)
       }
-      localStorage.setItem("megaTechCart", JSON.stringify(cartArray));
-      setNumberCart(Number(numberCart) + productOverview.quantity);
     } else {
+      // O carrinho está vazio, adiciona o produto
       const cartArray = [productOverview];
       localStorage.setItem("megaTechCart", JSON.stringify(cartArray));
-      setNumberCart(Number(numberCart) + productOverview.quantity);
+      setNumberCart(Number(numberCart) + 1); // Adiciona 1 ao numberCart (em vez de quantity)
     }
   }
+  
   
   
   
 
-  function showShopping(typeButton, productOverview) {
-    const existingCart = localStorage.getItem("megaTechCart");
-    if (existingCart) {
-      const cartArray = JSON.parse(existingCart);
-      const productIndex = cartArray.findIndex(item => item.id === productOverview.id);
-      if (productIndex >= 0) {
-        cartArray[productIndex].quantity += productOverview.quantity;
-      } else {
-        cartArray.push(productOverview);
-      }
-      localStorage.setItem("megaTechCart", JSON.stringify(cartArray));
+  // Função para lidar com a adição de produtos ao carrinho de compras e navegação para uma determinada rota
+function showShopping(typeButton, productOverview) {
+  // Recuperar o carrinho existente do armazenamento local
+  const existingCart = localStorage.getItem("megaTechCart");
+
+  // Verificar se o carrinho existe
+  if (existingCart) {
+    // Se o carrinho existir, transforme a string JSON do armazenamento local em um array JavaScript
+    const cartArray = JSON.parse(existingCart);
+
+    // Encontre o índice do produto atual no carrinho de compras
+    const productIndex = cartArray.findIndex(item => item.id === productOverview.id);
+
+    // Verifique se o produto já está no carrinho
+    if (productIndex >= 0) {
+      // Se o produto estiver no carrinho, incremente a quantidade desse produto
+      cartArray[productIndex].quantity += productOverview.quantity;
     } else {
-      const cartArray = [productOverview];
-      localStorage.setItem("megaTechCart", JSON.stringify(cartArray));
+      // Se o produto não estiver no carrinho, adicione o produto ao carrinho
+      cartArray.push(productOverview);
     }
-    navigate(typeButton);
+
+    // Salve o carrinho atualizado de volta ao armazenamento local
+    localStorage.setItem("megaTechCart", JSON.stringify(cartArray));
+  } else {
+    // Se o carrinho não existir, crie um novo carrinho com o produto atual e salve-o no armazenamento local
+    const cartArray = [productOverview];
+    localStorage.setItem("megaTechCart", JSON.stringify(cartArray));
   }
+
+  // Navegue para a rota especificada pelo typeButton
+  navigate(typeButton);
+}
+
 
   return { handleAddCart, showShopping };
 };
