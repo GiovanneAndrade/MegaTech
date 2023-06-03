@@ -13,12 +13,21 @@ import { Offers } from "./pages/offers/Offers";
 import { Signup } from "./pages/signup/Signup";
 import { Signin } from "./pages/signin/Signin";
 import { User } from "./pages/user/User";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <>
       <GlobalStyles />
       <BrowserRouter>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          closeOnClick
+          pauseOnHover
+        />
+        
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
