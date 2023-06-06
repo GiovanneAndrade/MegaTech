@@ -8,8 +8,8 @@ import { AccordionOders } from "../../components/accordionOders/AccordionOders";
 import pare from "../../assets/images/pare.gif";
 import { getFromLocalStorage } from "../../localStorage/LocalStorage";
 import { NewContainerHome } from "../historic/Historic";
-import Lottie from 'react-lottie';
-import animationData from '../../assets/images/signin.json';
+import Lottie from "react-lottie";
+import animationData from "../../assets/images/signin.json";
 function Orders() {
   const { order } = React.useContext(OrderContext);
   const products = order?.map((product) => product?.products);
@@ -17,17 +17,17 @@ function Orders() {
   const myToken = getFromLocalStorage("megaTechAuth");
   const defaultOptions = {
     loop: true,
-    autoplay: true, 
+    autoplay: true,
 
     animationData: animationData,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
+      preserveAspectRatio: "xMidYMid slice",
+    },
   };
   const lottieStyle = {
-    width: "500px",  
-    height: "500px", 
-  }
+    width: "500px",
+    height: "500px",
+  };
 
   return (
     <>
@@ -42,7 +42,7 @@ function Orders() {
         ) : (
           <NewContainerHome>
             Faça Login Para Prosseguir
-           <Lottie options={defaultOptions} style={lottieStyle} />
+            <Lottie options={defaultOptions} style={lottieStyle} />
           </NewContainerHome>
         )}
       </ContainerHome>
@@ -54,4 +54,7 @@ export default Orders;
 
 export const NewList = styled(List)`
   width: 800px;
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
 `;
