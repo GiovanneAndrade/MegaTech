@@ -47,6 +47,7 @@ export const Home = () => {
 
 export const ContainerHome = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,7 +90,7 @@ export const Conteiner = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 100%;
-
+    margin-top: 0;
     .containerLeft {
       display: none;
     }
