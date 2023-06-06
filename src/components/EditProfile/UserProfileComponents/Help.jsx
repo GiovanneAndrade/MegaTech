@@ -1,6 +1,7 @@
 import React from "react";
 import { ContactForm } from "../../ContactForm/ContactForm";
 import {
+  H1,
   NotificationsContainerBotton,
   NotificationsContainerTop,
 } from "./ControllerNotifications";
@@ -9,7 +10,7 @@ import { styled } from "@material-ui/core";
 export const Help = () => {
   return (
     <>
-      <NotificationsContainerTop>Ajuda</NotificationsContainerTop>
+      <NotificationsContainerTop><H1>Ajuda</H1></   NotificationsContainerTop>
       <NotificationsContainerBotton>
         <ContactForm help={true}/>
       </NotificationsContainerBotton>
