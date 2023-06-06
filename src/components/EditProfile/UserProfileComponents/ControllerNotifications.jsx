@@ -10,9 +10,11 @@ export const ControllerNotifications = () => {
   };
   return (
     <>
-      <NotificationsContainerTop>Notificações</NotificationsContainerTop>
+      <NotificationsContainerTop>
+        <H1>Notificações</H1>
+      </NotificationsContainerTop>
       <NotificationsContainerBotton>
-        <h1>Quer receber Notificações ?</h1>
+        <H1>Quer receber Notificações ?</H1>
         <p>promoções, status de pedidos, mensagens e etc...</p>
         <Switch
           checked={checked}
@@ -41,14 +43,34 @@ export const NotificationsContainerBotton = styled.div`
   flex-direction: column;
   align-items: flex-start;
   box-sizing: border-box;
-  
-  h1 {
-    font-size: 20px;
-    padding: 0 10px;
+
+  h1{
+    font-size: 19px;
+    padding: 5px 10px;
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 800;
+    line-height: 12px;
   }
   p {
+    font-family: "Lato";
     font-size: 15px;
     color: #dadada;
     padding: 0 10px;
+    font-style: normal;
+    font-weight: 400;
+  }
+  @media screen and (max-width: 768px) {
+   p{
+    color: #000;
+   }
   }
 `;
+export const H1 = styled.h1`
+    font-size: 19px;
+    padding: 5px 0;
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 800;
+    line-height: 12px;
+`
