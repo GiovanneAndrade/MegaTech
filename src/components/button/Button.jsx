@@ -3,11 +3,11 @@ import Button from "@mui/material/Button";
 import { useAddCart } from "../../hooks/UseCart";
 import { AppContext } from "../../contexts/AppContext";
 
-export const Buttons = ({ text, typeButton, productOverview, cardData }) => {
+export const Buttons = ({ text, typeButton, productOverview, cardData,  variant  }) => {
   const { handleAddCart, showShopping } = useAddCart();
   const { newCard, setNewCard, saved, setSaved } = React.useContext(AppContext);
   const [invalidData, setInvalidData] = React.useState(true);
-
+ 
   React.useEffect(() => {
     const regex = /^[0-9]{16}$/;
     if (cardData?.number && regex.test(cardData.number)) {
@@ -20,7 +20,7 @@ export const Buttons = ({ text, typeButton, productOverview, cardData }) => {
   return (
     <div>
       <Button
-        variant="contained"
+        variant={variant}
         disabled={text === "Salvar Cartão" ? invalidData : false}
         onClick={() => {
           if (text === "Salvar Cartão") {
@@ -35,6 +35,12 @@ export const Buttons = ({ text, typeButton, productOverview, cardData }) => {
             handleAddCart(productOverview);
           } else if ("comprar agora") {
             showShopping(typeButton, productOverview);
+          }
+        }}
+        sx={{
+          '@media (max-width:660px)': {
+            fontSize: '0.8rem',  
+            padding: '10px',   
           }
         }}
       >
