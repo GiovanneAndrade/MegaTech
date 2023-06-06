@@ -105,13 +105,6 @@ const FormLogin = () => {
 
   return (
     <GridContainer container justifyContent="center">
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        closeOnClick
-        pauseOnHover
-      />
       <Grid item xs={12} sm={6} md={4}>
         <Typography variant="h5" align="center" gutterBottom>
           <PersonPinIcon style={{ fontSize: "4.5rem", color: "#423838" }} />
