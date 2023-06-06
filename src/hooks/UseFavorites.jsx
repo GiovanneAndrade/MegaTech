@@ -18,7 +18,7 @@ export function useCreateFavorites() {
       return false;
     } catch (error) {
       console.log(error.response);
-      alert(error.response.status);
+     // alert(error.response.status);
       return true;
     }
   }
