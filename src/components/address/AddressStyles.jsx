@@ -1,28 +1,47 @@
-import { Card, FormControl } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  FormControl,
+  FormControlLabel,
+  Grid,
+} from "@mui/material";
 import styled from "styled-components";
 
 export const AddAnddressContainer = styled.form`
   width: 100%;
   display: flex;
-  gap:30px;
+  gap: 100px;
+  padding: 10px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 50px;
+  }
 `;
-
+ 
 export const AddAnddressSummary = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
-export const NewCard = styled(Card)`
- display: flex;
+export const NewCard = styled.div`
+  display: flex;
   align-items: center;
   padding: 1px;
-  padding-top: 5px;
-  background-color: #352424;
+  padding: 10px;
   height: 70px;
-  width: 300px;
+  width: 400px;
   margin-top: 10px;
-  border: 1px dotted #999;
- 
-
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  h2 {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 20px;
+  }
 `;
