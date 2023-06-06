@@ -37,11 +37,9 @@ export const ContactForm = ({ help }) => {
     selectedReasonError,
     setSelectedReasonError,
     setFormSubmitted,
-    newContact
+    newContact,
   } = useHandleSubmit();
 
-
-  
   return (
     <>
       {formSubmitted ? (
@@ -54,12 +52,10 @@ export const ContactForm = ({ help }) => {
             container
             spacing={0}
             justify="flex-start"
-            style={{ width: "100%", display: "flex", justifyContent: "end", }}
+            style={{ width: "100%", display: "flex", justifyContent: "end" }}
           >
             <Grid item>
-              <Button onClick={newContact }>
-                voltar
-              </Button>
+              <Button onClick={newContact}>voltar</Button>
             </Grid>
           </Grid>
         </>
@@ -189,6 +185,9 @@ export const Form = styled.form`
     margin: ${(props) => !props.help || "0 0 7px 0"};
     font-size: ${(props) => !props.help || "15px"};
   }
+  @media screen and (max-width: 768px) {
+    padding: ${(props) => !props.help? "0 20px":"0 1px" };
+  }
 `;
 
 export const StyledTextField = styled(TextField)`
@@ -213,4 +212,7 @@ export const StyledTextField = styled(TextField)`
         }
       }
     `}
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+  }
 `;
