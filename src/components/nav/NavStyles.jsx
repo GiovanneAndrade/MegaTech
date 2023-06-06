@@ -12,7 +12,8 @@ export const NavContainer = styled.nav`
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    min-height: 205px;
+    min-height: ${(props) => (props.myToken ? "155px" : "165px")};
+    padding-top: 1.5rem;
   }
 `;
 
@@ -25,16 +26,21 @@ export const MenuLeft = styled.div`
     align-items: center;
     //justify-content: center;
     cursor: pointer;
+    display: none;
   }
   @media screen and (max-width: 768px) {
     margin-top: -20px;
     gap: 0;
     width: 100%;
     font-size: 13px;
+
+    h1 {
+      margin-top: 25px;
+    }
   }
 `;
 
-export const MenuList = styled.li`
+export const MenuList = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -52,11 +58,13 @@ export const MenuList = styled.li`
   @media screen and (max-width: 768px) {
     flex-direction: column;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 0;
   }
 `;
 
-export const MenuCentral = styled.li`
+export const MenuCentral = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -66,14 +74,20 @@ export const MenuCentral = styled.li`
   }
 
   @media screen and (max-width: 768px) {
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: none;
+    position: relative;
+    z-index: 0;
   }
 `;
 export const NewMenuCentral = styled(MenuCentral)`
   display: none;
   @media screen and (max-width: 768px) {
     display: block;
+    width: 100%;
+    li {
+      font-size: 13px;
+    }
   }
 `;
 
@@ -81,7 +95,10 @@ export const Logo = styled.img`
   width: 200px;
   cursor: pointer;
   @media screen and (max-width: 768px) {
-    margin-bottom: 0.5rem;
+    margin-bottom: ${(props) => (props.myToken ? "1rem" : "0")};
+    width: 150px;
+    position: relative;
+    z-index: 1;
   }
 `;
 
@@ -106,8 +123,12 @@ export const Menu = styled.ul`
     align-items: end;
     width: 100%;
     margin-top: -55px;
+
     ul {
       margin-top: -20px;
+    }
+    div {
+      gap: 0;
     }
   }
 `;

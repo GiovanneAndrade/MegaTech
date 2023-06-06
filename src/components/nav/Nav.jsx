@@ -24,8 +24,15 @@ import Lottie from "react-lottie";
 import animationData from "../../assets/images/cep.json";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+} from "../../localStorage/LocalStorage";
 export const Nav = () => {
-  const [notifications, setNotifications] = React.useState(5);
+  const [notifications, setNotifications] = React.useState(1);
   const { showCategory, setShowCategory } = React.useContext(CategoriesContext);
   const navigate = useNavigate();
   function home() {
@@ -54,14 +61,24 @@ export const Nav = () => {
     height: "50px",
     margin: "0",
   };
-  return (
-    <NavContainer>
-      <MenuList>
-        <MenuLeft>
-          <Logo src={logo} onClick={home} />
 
-          <div>
-            Cep <Lottie options={defaultOptions} style={lottieStyle} />
+  const myToken = getFromLocalStorage("megaTechAuth");
+
+  function deleteToken() {
+    removeFromLocalStorage("megaTechAuth");
+    setTimeout(() => {
+      navigate("/");
+      window.location.reload();
+    }, 1000);
+  }
+  return (
+    <NavContainer myToken={myToken}>
+      <MenuList>
+        <MenuLeft >
+          <Logo src={logo} onClick={home} myToken={myToken}/>
+
+          <div  >
+            <h1>CEP</h1> <Lottie options={defaultOptions} style={lottieStyle} />
           </div>
         </MenuLeft>
         <MenuCentral>
@@ -79,43 +96,69 @@ export const Nav = () => {
           </ul>
         </MenuCentral>
         <Menu>
-          <div>
-            <Badge
-              badgeContent={notifications}
-              color="error"
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-            >
-              <NotificationsActiveIcon
-                sx={{ color: "#f6ae2d", cursor: "pointer", marginRight: "9px" }}
-              />
-            </Badge>
+          {myToken ? (
+            <div>
+              <Tooltip title="Finalizar sessão">
+                <IconButton>
+                  <LogoutIcon
+                    sx={{
+                      color: "#f6ae2d",
+                      cursor: "pointer",
+                      marginRight: "9px",
+                    }}
+                    onClick={deleteToken}
+                  />
+                </IconButton>
+              </Tooltip>
 
-            <AccountCircleIcon
-              onClick={() => navigate("/user")}
-              sx={{ color: "#f6ae2d", cursor: "pointer" }}
-            />
-            <Cart />
-          </div>
+              <Badge
+                badgeContent={notifications}
+                color="error"
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+              >
+                <NotificationsActiveIcon
+                  sx={{
+                    color: "#f6ae2d",
+                    cursor: "pointer",
+                    marginRight: "9px",
+                  }}
+                />
+              </Badge>
+              <Tooltip title="Gerencie as informações do seu perfil aqui">
+                <IconButton>
+                  <AccountCircleIcon
+                    onClick={() => navigate("/user")}
+                    sx={{ color: "#f6ae2d", cursor: "pointer" }}
+                  />
+                </IconButton>
+              </Tooltip>
+              <Cart />
+            </div>
+          ) :   <Cart />}
 
-          <ul>
-            <MenuItem onClick={() => navigate("/signup")}>
-              Crie Sua Conta
-            </MenuItem>
-
-            <MenuItem onClick={() => navigate("/signin")}>Entre</MenuItem>
-          </ul>
+          {!myToken ? (
+            <ul>
+              <MenuItem onClick={() => navigate("/signup")}>
+                Crie Sua Conta
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/signin")}>Entre</MenuItem>
+            </ul>
+          ) : null}
         </Menu>
         <NewMenuCentral>
           <Input />
           <ul>
-            <li>Categorias</li>
-            <li>Ofertas</li>
-            <li>Historico</li>
-            <li>Favoritos</li>
-            <li>Contato</li>
+          <li>
+              <Categories />
+            </li>
+            <li onClick={() => navigate("/offers")}>Ofertas</li>
+            <li onClick={() => navigate("/historic")}>Historico</li>
+            <li onClick={() => navigate("/favorites")}>Favoritos</li>
+            <li onClick={() => navigate("/contact")}>Contato</li>
+            <li onClick={() => navigate("/orders")}>pedidos</li>
           </ul>
         </NewMenuCentral>
       </MenuList>
