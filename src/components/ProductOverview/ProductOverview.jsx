@@ -11,7 +11,9 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { ButtonsStyles } from "./ProductOverviewStyles";
 import { Buttons } from "../button/Button";
 import { ProductContext } from "../../contexts/ProductContext";
+import { getFromLocalStorage } from "../../localStorage/LocalStorage";
 const ProductOverview = () => {
+  const myToken = getFromLocalStorage("megaTechAuth");
   const { productOverview, setProductOverview, scroll, setScroll } =
     React.useContext(ProductContext);
   const [selectColor, setSelectColor] = useState("");
@@ -32,7 +34,7 @@ const ProductOverview = () => {
     }
   }, [scroll, productOverview]);
   return (
-    <ProductContainer color={selectColor}>
+    <ProductContainer color={selectColor} myToken={myToken}>
       <div className="product">
         <div className="banner">
           <div className="carousel-container">
@@ -138,6 +140,7 @@ export const ProductContainer = styled.div`
     // background:#000;
     @media (max-width: 600px) {
       width: 85%;
+      height: ${props => props.myToken?'65%':'70%'};
       flex-direction: column;
       align-items: center;
     }
@@ -150,7 +153,8 @@ export const ProductContainer = styled.div`
       @media (max-width: 600px) {
         align-items: center;
         width: 100%;
-        height: 50%;
+        height: 80%;
+        
       }
       .carousel-container {
         width: 100%;

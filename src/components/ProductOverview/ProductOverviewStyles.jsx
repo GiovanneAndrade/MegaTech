@@ -20,13 +20,14 @@ export const ContainerLeft = styled.div`
   gap: 15px;
   @media screen and (max-width: 768px) {
     width: 100%;
+    
   }
 `;
 export const ContainerRight = styled.div`
   width: 25%;
   height: 500px;
-  background: #FFF;
-  border: 1px solid #DDD;
+  background: #fff;
+  border: 1px solid #ddd;
   @media screen and (max-width: 768px) {
     display: none;
   }
@@ -41,14 +42,13 @@ export const ContainerProductImg = styled.div`
   width: 50%;
   height: 100%;
 
-   padding: 20px 60px 20px 20px;
+  padding: 20px 60px 20px 20px;
   @media screen and (max-width: 768px) {
     width: 44vh;
     height: 80%;
   }
 `;
 export const ContainerProductOverview = styled(ContainerProductImg)`
-  
   position: relative;
   border-left: 0.1px solid #ccc;
   display: flex;
@@ -80,6 +80,13 @@ export const ButtonsStyles = styled.div`
   position: absolute;
   bottom: 0;
   padding: 20px 40px;
+  @media (max-width: 600px) {
+    position: static;
+    padding: 0;
+    margin-top: 19px;
+    gap: 15px;
+    justify-content:  space-between;
+  }
 `;
 
 export const ProductOverviewShowCategory = styled.div`
@@ -88,5 +95,4 @@ export const ProductOverviewShowCategory = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
- 
-`
+`;
