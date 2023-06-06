@@ -104,7 +104,7 @@ const FormLogin = () => {
   };
 
   return (
-    <GridContainer container justifyContent="center">
+    <GridContainer container justifyContent="center" sx={{ padding:'12px'}}>
       <Grid item xs={12} sm={6} md={4}>
         <Typography variant="h5" align="center" gutterBottom>
           <PersonPinIcon style={{ fontSize: "4.5rem", color: "#423838" }} />
