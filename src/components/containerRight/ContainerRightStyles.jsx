@@ -8,4 +8,13 @@ export const ContainerRightInternal = styled.div`
   @media screen and (max-width: 768px) {
     width: 100%;
   }
+  .scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+ font-size: 100px;
+ 
+}
+
 `;
