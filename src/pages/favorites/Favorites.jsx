@@ -65,11 +65,12 @@ export const NewInformationProducts = styled(InformationProducts)``;
 export const NewConteiner = styled(Conteiner)`
   flex-wrap: wrap;
   background: transparent;
-  gap: 60px;
-
+  gap: 30px;
+  width: 60%;
   justify-content: center;
-  .newDiv {
-    width: 200px;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    gap: 47px;
   }
 `;
- 
