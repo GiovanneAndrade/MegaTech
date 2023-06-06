@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {
+  H1,
   NotificationsContainerBotton,
   NotificationsContainerTop,
 } from "./ControllerNotifications";
@@ -33,15 +34,17 @@ export const EditSecurity = () => {
 
   return (
     <>
-      <NotificationsContainerTop>Segurança</NotificationsContainerTop>
+      <NotificationsContainerTop>
+        <H1>Segurança</H1>
+      </NotificationsContainerTop>
 
       {successPasswod ? (
         <SuccessNotificationsContainerBotton>
-          <Success message={'senha trocada com sucesso'} icon={animationData}/>
+          <Success message={"senha trocada com sucesso"} icon={animationData} />
         </SuccessNotificationsContainerBotton>
       ) : (
         <NotificationsContainerBotton>
-          <H1>Trocar Senha</H1>
+          <H1EditSecurity>Trocar Senha</H1EditSecurity>
           <form onSubmit={handleSubmitPassword}>
             <StyledTextField
               type={showPassword ? "text" : "password"}
@@ -98,11 +101,11 @@ export const EditSecurity = () => {
       )}
       {successEmail ? (
         <SuccessNotificationsContainerBotton>
-          <Success message={'email trocado com sucesso'} icon={animationData}/>
+          <Success message={"email trocado com sucesso"} icon={animationData} />
         </SuccessNotificationsContainerBotton>
       ) : (
         <NotificationsContainerBotton>
-          <H1>Trocar Email</H1>
+          <H1EditSecurity>Trocar Email</H1EditSecurity>
           <Form onSubmit={handleSubmitEmail}>
             <StyledTextField
               type={"email"}
@@ -143,7 +146,7 @@ export const EditSecurity = () => {
   );
 };
 
-export const H1 = styled.h1`
+export const H1EditSecurity = styled.h1`
   margin-bottom: 20px;
 `;
 export const Form = styled.form`
