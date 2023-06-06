@@ -67,7 +67,7 @@ export const AccordionOders = ({ orders }) => {
 
   const deliveryStatus = getDeliveryStatus();
   return (
-    <div>
+   
       <NewList component="nav">
         <Accordion expanded={expandedOrderId === "order1"}>
           <AccordionSummary
@@ -97,6 +97,6 @@ export const AccordionOders = ({ orders }) => {
           </AccordionDetails>
         </Accordion>
       </NewList>
-    </div>
+   
   );
 };
