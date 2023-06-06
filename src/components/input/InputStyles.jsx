@@ -10,10 +10,11 @@ export const InputContainer = styled.nav`
   width: 500px;
   height: 40px;
   background: #fff;
+
   @media screen and (max-width: 768px) {
     width: 100%;
     margin-bottom:10px;
-    margin-top:-10px;
+    margin-top:${props => props.myToken?'-2px':'-10px'};
   }
   div {
     display: flex;
