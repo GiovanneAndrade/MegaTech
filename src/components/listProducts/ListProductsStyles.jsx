@@ -11,21 +11,30 @@ export const ListProductsContainer = styled.div`
   padding-left: 580px;
   padding-right: 5px;
   overflow-x: scroll;
- 
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
   @media screen and (max-width: 768px) {
     width: 100%;
+    padding-left: 1020px;
+    ${(props) => {
+      if (props.type === "isCategory") {
+        return `
+         padding-left: 0; 
+      `;
+      }
+    }}
   }
-  ${props=> {
-   
-    if (props.type === "isCategory"){
-      
+  ${(props) => {
+    if (props.type === "isCategory") {
       return `
       
         overflow-x: hidden;
         flex-wrap: wrap;
         padding-left: 0;
          
-      `
+      `;
     }
   }}
 `;
@@ -39,6 +48,7 @@ export const HomeContainer = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const Prev = styled.div`
