@@ -11,14 +11,17 @@ import EmailIcon from "@mui/icons-material/Email";
 import EditProfileForm from "./UserProfileComponents/EditProfileForm";
 import HelpIcon from "@mui/icons-material/Help";
 import { Notifications } from "@mui/icons-material";
-import { ControllerNotifications } from "./UserProfileComponents/ControllerNotifications";
+import {
+  ControllerNotifications,
+  H1,
+} from "./UserProfileComponents/ControllerNotifications";
 import { Help } from "./UserProfileComponents/Help";
 import { EditAppearance } from "./UserProfileComponents/EditAppearance";
 import { EditSecurity } from "./UserProfileComponents/EditSecurity";
 import { Message } from "./UserProfileComponents/Message";
 function EditProfile() {
   const [showOtherComponent, setShowOtherComponent] = useState("editProfile");
-  console.log(showOtherComponent);
+
   const handleClick = (componentName) => {
     setShowOtherComponent(componentName);
   };
@@ -26,47 +29,52 @@ function EditProfile() {
   return (
     <ContainerHome>
       <EditProfileContainer>
-        <div className="menuLeft">
-          <li
-            onClick={() => handleClick("editProfile")}
-            className={showOtherComponent === "editProfile" ? "selected" : ""}
-          >
-            <EditIcon className="icon" /> Editar Perfil
-          </li>
-          <li
-            onClick={() => handleClick("controllerNotifications")}
-            className={
-              showOtherComponent === "controllerNotifications" ? "selected" : ""
-            }
-          >
-            <NotificationsActiveIcon className="icon" /> Notificações
-          </li>
-          <li
-            onClick={() => handleClick("security")}
-            className={showOtherComponent === "security" ? "selected" : ""}
-          >
-            <SecurityIcon className="icon" /> Segurança
-          </li>
-          <li
-            onClick={() => handleClick("appearance")}
-            className={showOtherComponent === "appearance" ? "selected" : ""}
-          >
-            <PaletteIcon className="icon" />
-            Aparencia
-          </li>
-          <li
-            onClick={() => handleClick("message")}
-            className={showOtherComponent === "message" ? "selected" : ""}
-          >
-            <EmailIcon className="icon" /> Mensagens
-          </li>
-          <li
-            onClick={() => handleClick("help")}
-            className={showOtherComponent === "help" ? "selected" : ""}
-          >
-            <HelpIcon className="icon" /> Ajuda
-          </li>
+        <div className="scroll">
+          <div className="menuLeft">
+            <li
+              onClick={() => handleClick("editProfile")}
+              className={showOtherComponent === "editProfile" ? "selected" : ""}
+            >
+              <EditIcon className="icon" /> Editar Perfil
+            </li>
+            <li
+              onClick={() => handleClick("controllerNotifications")}
+              className={
+                showOtherComponent === "controllerNotifications"
+                  ? "selected"
+                  : ""
+              }
+            >
+              <NotificationsActiveIcon className="icon" /> Notificações
+            </li>
+            <li
+              onClick={() => handleClick("security")}
+              className={showOtherComponent === "security" ? "selected" : ""}
+            >
+              <SecurityIcon className="icon" /> Segurança
+            </li>
+            <li
+              onClick={() => handleClick("appearance")}
+              className={showOtherComponent === "appearance" ? "selected" : ""}
+            >
+              <PaletteIcon className="icon" />
+              Aparencia
+            </li>
+            <li
+              onClick={() => handleClick("message")}
+              className={showOtherComponent === "message" ? "selected" : ""}
+            >
+              <EmailIcon className="icon" /> Mensagens
+            </li>
+            <li
+              onClick={() => handleClick("help")}
+              className={showOtherComponent === "help" ? "selected" : ""}
+            >
+              <HelpIcon className="icon" /> Ajuda
+            </li>
+          </div>
         </div>
+
         <div className="menuRight">
           {showOtherComponent === "controllerNotifications" ? (
             <ControllerNotifications />
@@ -80,7 +88,9 @@ function EditProfile() {
             <Message />
           ) : (
             <>
-              <div className="menuRightTop">Editar Perfil</div>
+              <div className="menuRightTop">
+                <H1>Editar Perfil</H1>
+              </div>
               <div className="menuRightBotton">
                 <EditProfileForm />
               </div>
@@ -99,17 +109,17 @@ export const EditProfileContainer = styled(NewContainerHome)`
   width: 40%;
   // border-radius: 0;
   //height: 40%;
-  
+
   .selected {
     height: 50px;
     border-right: solid 5px #f6ae2d;
     display: flex;
     text-align: center;
-    transition: height 0.7s ease, border-right 0.3s ease;
+   //transition: height 0.7s ease, border-right 0.3s ease;
   }
   flex-direction: row;
   .menuLeft {
-    width: 30%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -131,7 +141,7 @@ export const EditProfileContainer = styled(NewContainerHome)`
     border-top-right-radius: 10px;
     display: flex;
     align-items: center;
-   // justify-content: center;
+    // justify-content: center;
     flex-direction: column;
     padding: 30px 30px 30px 30px;
     //background: #f6ae2d;
@@ -143,16 +153,16 @@ export const EditProfileContainer = styled(NewContainerHome)`
     padding: 10px 10px 0 40px;
     width: 100%;
     gap: 15px;
-    height: 40px; /* Or whatever the unselected height should be */
-    border-right: solid 5px transparent; /* To ensure smooth transition */
-    transition: height 0.7s ease, border-right 0.3s ease;
+    height: 40px; 
+    border-right: solid 5px transparent;  
+   // transition:  border-right 0.3s ease;
   }
   .icon {
     color: #f6ae2d !important;
   }
   .menuRightTop {
     width: 100%;
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,11 +170,51 @@ export const EditProfileContainer = styled(NewContainerHome)`
     font-size: 20px;
     // margin-bottom:20px;
     padding: 0 0 20px 0;
-   // background:#000;
+    // background:#000;
   }
   .menuRightBotton {
     width: 100%;
     height: 70%;
     border-bottom-right-radius: 10px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    padding: 0 10px;
+    margin-top: 0;
+    background: transparent;
+    .menuLeft {
+      width: 100%;
+      height: 30%;
+      flex-direction: row;
+      overflow: scroll;
+      gap: 5px;
+      padding-left: 400px;
+      border-radius: 0;
+    }
+    .menuRight{
+      min-width: 109%;
+    }
+    li {
+      padding: 1px 1px 0 4px;
+      font-size: 15px;
+      min-width: 130px;
+    }
+    .selected {
+      height: 50px;
+      //  background: blue;
+     // min-width: 150px;
+      border-right: 0 ;
+      border-bottom: solid 7px #f6ae2d;
+      /*  display: flex;
+      text-align: center;
+      transition: height 0.7s ease, border-right 0.3s ease; */
+    }
+    .scroll{
+      display: flex;
+      overflow-x: hidden;
+      width: 100%;
+    }
   }
 `;
