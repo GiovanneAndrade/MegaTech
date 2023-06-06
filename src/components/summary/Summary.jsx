@@ -20,12 +20,13 @@ import { getFromLocalStorage } from "../../localStorage/LocalStorage";
 import { OrderContext } from "../../contexts/OrderContext";
 import { AnddressContext } from "../../contexts/Anddress";
 import { AppContext } from "../../contexts/AppContext";
+import { H1 } from "../EditProfile/UserProfileComponents/ControllerNotifications";
 
 export default function OrderSummary({ isTotal }) {
   const { selectedAddress, setSelectedAddress } =
     React.useContext(AnddressContext);
   const { finalOrder, setFinalOrder } = React.useContext(OrderContext);
-  console.log(finalOrder)
+  console.log(finalOrder);
   const { newCard, setNewCard, showCard, setShowCard } =
     React.useContext(AppContext);
   const existingProducts =
@@ -100,13 +101,35 @@ export default function OrderSummary({ isTotal }) {
   const selectedProducts = getFromLocalStorage("selectedProducts");
 
   return (
-    <Box sx={{ bgcolor: "#f7f7f7", p: 2, width: "50%", padding: "25px 50px" }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        //bgcolor: "#f7f7f7",
+        p: 2,
+        width: { sx: "100%", sm: "50%" },
+        padding: { sx: "25px ", sm: "25px 0px " },
+        alignItems: "center",
+      }}
+    >
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          display: "flex",
+          width: "80%",
+          bgcolor: "#f7f7f7",
+          alignItems: "center",
+          padding: "10px",
+        }}
+      >
+        <Grid item xs={12} sx={{ borderBottom: "1px dashed #000" }}>
           <Typography variant="h6">Resumo do Pedido</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body1">Produtos Selecionados:</Typography>
+          <Typography variant="body1">
+            <H1>Produtos Selecionados:</H1>
+          </Typography>
           {selectedProducts?.map((product) => (
             <Typography key={product.name} variant="body2">
               - {product.name} x{product.quantity}
@@ -114,7 +137,9 @@ export default function OrderSummary({ isTotal }) {
           ))}
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body1">Endereço Selecionado:</Typography>
+          <Typography variant="body1">
+            <H1>Endereço Selecionado:</H1>
+          </Typography>
 
           <Typography variant="body2">
             {`${selectedAddress?.name_recipient}, ${selectedAddress?.number} - ${selectedAddress?.city} - ${selectedAddress?.cep}`}
@@ -122,7 +147,9 @@ export default function OrderSummary({ isTotal }) {
         </Grid>
 
         <FormCheck>
-          <Typography variant="body1">Selecione a Entrega:</Typography>
+          <Typography variant="body1">
+            <H1>Selecione a Entrega:</H1>
+          </Typography>
           <FormControlLabel
             value="standard"
             control={roundCheckbox}
@@ -146,7 +173,9 @@ export default function OrderSummary({ isTotal }) {
           />
         </FormCheck>
         <Grid item xs={12}>
-          <Typography variant="body1">Método de Pagamento:</Typography>
+          <Typography variant="body1">
+            <H1>Método de Pagamento:</H1>
+          </Typography>
           <Select
             value={selectedPaymentMethod}
             onChange={handlePaymentMethodChange}
@@ -168,7 +197,9 @@ export default function OrderSummary({ isTotal }) {
           </Select>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body1">Número de Parcelas:</Typography>
+          <Typography variant="body1"  >
+            <H1>Número de Parcelas:</H1>
+          </Typography>
           <Select
             value={selectedInstallments}
             onChange={handleInstallmentsChange}
