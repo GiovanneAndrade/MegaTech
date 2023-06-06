@@ -7,6 +7,8 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { IconButton } from "@material-ui/core";
 import { OrderContext } from "../../contexts/OrderContext";
 import { AnddressContext } from "../../contexts/Anddress";
+import { makeStyles } from "@material-ui/core/styles";
+import { getFromLocalStorage } from "../../localStorage/LocalStorage";
 
 export const CloseOrder = ({
   img,
@@ -36,7 +38,7 @@ export const CloseOrder = ({
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
-   
+
     if (event.target.checked) {
       const selectedProduct = {
         id,
@@ -113,10 +115,12 @@ export const CloseOrder = ({
   window.onload = () => {
     localStorage.removeItem("selectedProducts");
   };
+
+  const myToken = getFromLocalStorage("megaTechAuth");
   return (
     <CloseOrderContainer>
       <ProductSummary>
-        <div>
+        <div className="closeOrderLeft">
           <Checkbox
             checked={checked}
             onChange={handleChange}
@@ -124,20 +128,28 @@ export const CloseOrder = ({
           />
 
           <img src={img} />
-          <p>{name} </p>
+          <p className="name">{name} </p>
+          <div className="responsive">
+            <p className="nameResponsive">{name} </p>
+            <p className="price">R$ {price * quantity}</p>
+          </div>
         </div>
-        <div className="quantity-container">
-          <IconButton onClick={handleDecrement}>
-            <RemoveIcon />
-          </IconButton>
-          <p className="quantity">{quantity}</p>
+        <div className="closeOrderQuantitys">
+          <h3 >quantidade</h3>
+          <div className="closeOrderQuantity">
+            <IconButton onClick={handleDecrement}>
+              <RemoveIcon />
+            </IconButton>
+            <p className="quantity">{quantity}</p>
 
-          <IconButton onClick={handleIncrement}>
-            <AddIcon />
-          </IconButton>
+            <IconButton onClick={handleIncrement}>
+              <AddIcon />
+            </IconButton>
+          </div>
         </div>
-        <p className="price">R$ {price * quantity}</p>
-        <p>valor total </p>
+        <div className="closeOrderPrice">
+          <p className="price">R$ {price * quantity}</p>
+        </div>
       </ProductSummary>
     </CloseOrderContainer>
   );
