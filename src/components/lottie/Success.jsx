@@ -3,7 +3,7 @@ import Lottie from "react-lottie";
 
 import animationCard from "../../assets/images/card.json";
 import styled from "styled-components";
-const Success = ({ message, icon }) => {
+const Success = ({ message, icon, isResult }) => {
   const defaultOptions = {
     loop: false,
     autoplay: true,
@@ -14,8 +14,8 @@ const Success = ({ message, icon }) => {
     },
   };
   const lottieStyle = {
-    width: "100px",
-    height: "100px",
+    width: isResult ? "40%" : "100px",
+    height: isResult ? "40%" : "100px",
   };
   return (
     <SuccessContainer>
