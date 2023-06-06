@@ -33,7 +33,7 @@ function EditProfileForm() {
   return (
     <>
       {success ? (
-       <Success message={'dados editado com sucesso'} icon={animationData}/>
+        <Success message={"dados editado com sucesso"} icon={animationData} />
       ) : (
         <Form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -64,7 +64,7 @@ function EditProfileForm() {
               />
             </Grid>
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <StyledTextField
               label="Email"
               placeholder="Digite seu Email"
@@ -76,7 +76,7 @@ function EditProfileForm() {
                 shrink: true,
               }}
             />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
             <StyledTextField
               label="Endereço"
@@ -133,7 +133,7 @@ function EditProfileForm() {
               </FormControl>
             </Grid>
           </Grid>
-          <Grid item xs={12}>
+          {/*  <Grid item xs={12}>
             <StyledTextField
               label="Senha"
               placeholder="Digite sua Senha"
@@ -145,12 +145,12 @@ function EditProfileForm() {
                 shrink: true,
               }}
             />
-          </Grid>
+          </Grid> */}
           <Grid
             container
             spacing={2}
             justify="flex-end"
-            style={{ width: "100%", display: "flex", justifyContent: "end" }}
+            style={{ display: "flex", justifyContent: "end", marginTop:'19%' }}
           >
             <Grid item>
               <Button
@@ -183,6 +183,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
+   
 `;
 export const StyledTextField = styled(TextField)`
   && {
