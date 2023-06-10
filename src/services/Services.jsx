@@ -3,9 +3,8 @@ import { getFromLocalStorage } from "../localStorage/LocalStorage";
 
 const APIprefix = "http://localhost:5000";
 
+const tokenLocal = getFromLocalStorage("megaTechAuth");
 
-const tokenLocal = getFromLocalStorage('megaTechAuth')
- 
 const config = {
   headers: {
     Authorization: `Bearer ${tokenLocal?.token}`,
@@ -71,7 +70,10 @@ function deleteMyAddress(id) {
   return axios.delete(`${APIprefix}/address/${id}`, config);
 }
 function updateMyAddress(currentAddress, previousAddress) {
-  return axios.put(`${APIprefix}/address/${currentAddress}/${previousAddress}`, config);
+  return axios.put(
+    `${APIprefix}/address/${currentAddress}/${previousAddress}`,
+    config
+  );
 }
 
 function getRequests() {
@@ -101,6 +103,10 @@ function getSearch(searchTerm) {
 
 function postRequest(finalOrder, userId) {
   const Product = finalOrder[0].products.map((product) => ({ id: product.id }));
+  const productQuantities = finalOrder[0].products.map((product) => ({
+    productId: product.id,
+    quantity: product.quantity,
+  }));
   const addressId = finalOrder[1].address.id;
   const total = finalOrder[2].total;
 
@@ -114,6 +120,7 @@ function postRequest(finalOrder, userId) {
     addressId: addressId,
     userId: Number(userId),
     products: Product,
+    productQuantities: productQuantities,
   };
 
   return axios.post(`${APIprefix}/request`, data, config);
