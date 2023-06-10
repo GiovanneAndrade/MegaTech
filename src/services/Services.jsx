@@ -24,7 +24,10 @@ function getProducts() {
 function getCategories() {
   return axios.get(`${APIprefix}/categories`);
 }
+function getPageCategories(page, categoryId) {
 
+  return axios.get(`${APIprefix}/categories/page?page=${page}&categoryId=${categoryId}`);
+}
 function getFavorities() {
   
   return axios.get(`${APIprefix}/favorities`, config);
@@ -131,5 +134,6 @@ export {
   getRequests,
   postUser,
   postSignin,
-  getSearch
+  getSearch,
+  getPageCategories
 };
