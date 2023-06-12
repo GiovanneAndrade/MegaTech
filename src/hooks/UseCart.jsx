@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
+import { ProductContext } from "../contexts/ProductContext";
+import { saveToLocalStorage } from "../localStorage/LocalStorage";
+import { CategoriesContext } from "../contexts/Categories";
 
 function useShoppingCart() {
+  const { productOverview, setProductOverview } = React.useContext(ProductContext);
+  const { setIsCategory } = React.useContext(CategoriesContext);
+
+  const navigate = useNavigate();
+
   const existingCart = localStorage.getItem("megaTechCart");
   let initialItemsState = [];
 
@@ -43,8 +51,45 @@ function useShoppingCart() {
     localStorage.setItem("megaTechCart", JSON.stringify(newItems));
   };
 
+  function showProduct(
+    name,
+    avaliações,
+    image,
+    description,
+    quantity,
+    id,
+    category,
+    stoke,
+    productOverview
+  ) {
+    setProductOverview({
+      name,
+      price: avaliações,
+      image,
+      description,
+      quantity,
+      id,
+      category,
+      stoke
+    });
+     saveToLocalStorage("productOverview", {
+      name,
+      price: avaliações,
+      image,
+      description,
+      quantity,
+      id,
+      category,
+      stoke
+    })
+     
+    setIsCategory(category);
+    navigate("/product");
+  }
+
   return {
     items,
+    showProduct,
     handleAddItem,
     handleRemoveItem,
     handleDeleteItem,
