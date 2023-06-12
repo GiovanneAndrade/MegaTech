@@ -1,10 +1,12 @@
 import React from "react";
 import { Nav } from "../../components/nav/Nav";
-import { ContainerHome } from "../home/Home";
+
 import styled from "styled-components";
 import definicoes from "../../assets/images/definicoes.gif";
 import Lottie from 'react-lottie';
 import animationData from '../../assets/images/embreve.json';
+import { Shortly } from "../../components/lottie/Shortly";
+import { ContainerHome } from "../home/Home";
 export const Historic = () => {
   const defaultOptions = {
     loop: true,
@@ -22,12 +24,7 @@ export const Historic = () => {
   return (
     <>
       <Nav />
-      <ContainerHome>
-        <NewContainerHome>
-          Trabalhando Nisso
-          <Lottie options={defaultOptions} style={lottieStyle} />
-        </NewContainerHome>
-      </ContainerHome>
+      <Shortly/>
     </>
   );
 };

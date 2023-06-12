@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { ContainerLeftInternal } from "./ContainerLeftStyles";
 import styled from "styled-components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FilterContainer = styled.div`
   max-width: 100%;
   display: flex;
   flex-direction: column;
- // background-color: #f5f5f5;
+  // background-color: #f5f5f5;
   padding: 10px;
   gap: 20px;
 `;
@@ -20,6 +22,9 @@ const FilterOption = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 5px;
+  .icon{
+    cursor: pointer;
+  }
 `;
 
 const FilterCheckbox = styled.input`
@@ -43,25 +48,36 @@ const ApplyButton = styled.button`
 `;
 
 export const ContainerLeft = () => {
-  const [priceFilter, setPriceFilter] = useState("");
-  const [priceOrder, setPriceOrder] = useState("");
+  const [type, setType] = useState(false);
+  const [priceOrder, setPriceOrder] = useState(false);
   const [showPriceOptions, setShowPriceOptions] = useState(false);
+  const [assessment, setAssessment] = useState(false);
+  const [available, setAvailable] = useState(false);
+  React.useEffect(() => {
+    if (showPriceOptions || priceOrder || assessment || available || type) {
+      toast.info("Em Breve!", {
+        className: "custom-toast",
+      });
+    }
+  }, [showPriceOptions, priceOrder, assessment, available, type]);
 
-  const handlePriceFilterChange = (event) => {
-    setPriceFilter(event.target.value);
+  const typeCheckboxChange = (event) => {
+    setType(event.target.checked);
   };
 
   const handlePriceOrderChange = (event) => {
-    setPriceOrder(event.target.value);
+    setPriceOrder(event.target.checked);
   };
 
   const handlePriceCheckboxChange = (event) => {
     setShowPriceOptions(event.target.checked);
   };
 
-  const handleApplyFilter = () => {
-    // Implementar a lógica para aplicar o filtro aqui
-    console.log("Filtro aplicado!");
+  const assessmentCheckboxChange = (event) => {
+    setAssessment(event.target.checked);
+  };
+  const availableCheckboxChange = (event) => {
+    setAvailable(event.target.checked);
   };
 
   return (
@@ -71,27 +87,27 @@ export const ContainerLeft = () => {
 
         <FilterOption>
           <FilterCheckbox
+            className="icon"
             type="checkbox"
             id="price"
             onChange={handlePriceCheckboxChange}
           />
           <FilterLabel htmlFor="price">Price</FilterLabel>
-          
         </FilterOption>
         <FilterOption>
-          <FilterCheckbox type="checkbox" id="bestSellers" />
+          <FilterCheckbox className="icon" type="checkbox" id="bestSellers" onChange={handlePriceOrderChange}/>
           <FilterLabel htmlFor="bestSellers">Mais vendidos</FilterLabel>
         </FilterOption>
         <FilterOption>
-          <FilterCheckbox type="checkbox" id="rating" />
+          <FilterCheckbox className="icon" type="checkbox" id="rating" onChange={assessmentCheckboxChange}/>
           <FilterLabel htmlFor="rating">Avaliação</FilterLabel>
         </FilterOption>
         <FilterOption>
-          <FilterCheckbox type="checkbox" id="availability" />
+          <FilterCheckbox className="icon" type="checkbox" id="availability" onChange={availableCheckboxChange}/>
           <FilterLabel htmlFor="availability">Disponibilidade</FilterLabel>
         </FilterOption>
         <FilterOption>
-          <FilterCheckbox type="checkbox" id="brand" />
+          <FilterCheckbox className="icon" type="checkbox" id="brand" onChange={typeCheckboxChange}/>
           <FilterLabel htmlFor="brand">Marca</FilterLabel>
         </FilterOption>
       </FilterContainer>
