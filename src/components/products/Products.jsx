@@ -20,6 +20,7 @@ import {
   saveToLocalStorage,
 } from "../../localStorage/LocalStorage";
 import StarIcon from "@mui/icons-material/Star";
+import useShoppingCart from "../../hooks/UseCart";
 export const Products = ({
   name,
   avaliações,
@@ -29,16 +30,18 @@ export const Products = ({
   id,
   isFavorite,
   category,
+  stoke
 }) => {
   const navigate = useNavigate();
   const [checked, setChecked] = useState(false);
-
+ 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const { productOverview, setProductOverview } =
     React.useContext(ProductContext);
   const { myFavorities, setMyFavorities, favorities } =
     React.useContext(FavoritesContext);
   const { setIsCategory } = React.useContext(CategoriesContext);
+  const { showProduct  } = useShoppingCart();
   useEffect(() => {
     if (favorities?.filter((f) => f.id === id).length > 0 || isFavorite) {
       setChecked(true);
@@ -47,27 +50,7 @@ export const Products = ({
     }
   }, [favorities, id, isFavorite]);
 
-  function showProduct(
-    name,
-    avaliações,
-    image,
-    description,
-    quantity,
-    id,
-    category
-  ) {
-    setProductOverview({
-      name,
-      price: avaliações,
-      image,
-      description,
-      quantity,
-      id,
-      category,
-    });
-    setIsCategory(category);
-    navigate("/product");
-  }
+ 
   const { createFavorites, removeFavorites } = useCreateFavorites();
 
   async function handleCheckboxChange() {
@@ -92,7 +75,7 @@ export const Products = ({
     
       <ImageContainer
         onClick={() =>
-          showProduct(name, avaliações, image, description, 1, id, category)
+          showProduct(name, avaliações, image, description, 1, id, category, stoke, productOverview)
         }
       >
         <img src={image} />
@@ -100,7 +83,7 @@ export const Products = ({
       <InformationProducts>
         <h1
           onClick={() =>
-            showProduct(name, avaliações, image, description, 1, id, category)
+            showProduct(name, avaliações, image, description, 1, id, category, stoke, productOverview)
           }
         >
           {name}
@@ -108,7 +91,7 @@ export const Products = ({
 
         <p
           onClick={() =>
-            showProduct(name, avaliações, image, description, 1, id, category)
+            showProduct(name, avaliações, image, description, 1, id, category, stoke, productOverview)
           }
         >
           {" "}
