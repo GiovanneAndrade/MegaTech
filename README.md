@@ -6,16 +6,17 @@ O aplicativo conta com uma API RESTful personalizada construída com NodeJS que 
 
 ## Recursos
 
-- Navegação de produtos: os usuários podem navegar por todos os produtos disponíveis, bem como filtrar e classificar os produtos por várias categorias e atributos.
- - Carrinho de compras: os usuários podem adicionar produtos ao seu carrinho e ver um resumo do seu carrinho antes de fazer o checkout.
- - Checkout: os usuários podem preencher suas informações de envio e pagamento para concluir suas compras.
- - Conta de usuário: os usuários podem se cadastrar, fazer login e ver o histórico de seus pedidos.
- - Gerenciamento de Estoque: O aplicativo permite o rastreamento do estoque de produtos em tempo real, informando automaticamente os usuários quando um item está fora de estoque.
- - Busca: O aplicativo possui uma funcionalidade de busca robusta, permitindo que os usuários encontrem rapidamente os produtos que desejam através de palavras-chave.
- - Suporte ao Cliente: O aplicativo oferece um sistema de suporte ao cliente onde os usuários podem reportar problemas ou fazer perguntas sobre os produtos.
- - Wishlist: Os usuários podem adicionar produtos à sua "Wishlist", permitindo que eles guardem produtos que gostariam de comprar no futuro.
-- Paginação: A aplicação apresenta um sistema de paginação que permite aos usuários navegar facilmente pelo catálogo de produtos, tornando a experiência mais amigável e eficiente.
-- Notificações: Notificações em tempo real para atualizações de status de pedidos e eventos importantes para melhorar a experiência do usuário.
+- **Navegação de Produtos**: Exploração e categorização de produtos disponíveis.
+- **Carrinho de Compras**: Adição de produtos e visualização prévia do carrinho.
+- **Checkout**: Preenchimento de informações de envio e pagamento para finalizar compras.
+- **Conta de Usuário**: Registro, login e acesso ao histórico de pedidos.
+- **Gerenciamento de Estoque**: Rastreamento em tempo real do estoque.
+- **Busca**: Pesquisa eficiente por produtos através de palavras-chave.
+- **Suporte ao Cliente**: Sistema para reportar problemas e fazer perguntas.
+- **Wishlist**: Salvamento de produtos para futuras compras.
+- **Paginação**: Navegação amigável e eficiente pelo catálogo de produtos.
+- **Notificações**: Atualizações em tempo real sobre o status dos pedidos.
+
 ## Tecnologias
 
 As seguintes ferramentas e frameworks foram utilizados na construção do projeto:<br>
