@@ -10,8 +10,7 @@ import { CategoriesContext } from "../../contexts/Categories";
 
 export function Categories() {
   const [selectedCategory, handleCategoryClick] = useCategorySelection("");
-  const { category } = React.useContext(CategoriesContext);
- 
+  const { category, showCategory} = React.useContext(CategoriesContext);
 
   const { anchorEl, handleClick, handleClose } = usePopover();
 
@@ -43,6 +42,12 @@ export function Categories() {
               key={category?.id}
               selected={selectedCategory === category?.name}
               onClick={() => handleCategoryClick(category)}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                padding: "10px 20px",
+                alignItems: "inherit",
+              }}
             >
               <ListItemText primary={category?.name} />
             </ListItemButton>
