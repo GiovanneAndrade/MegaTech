@@ -188,7 +188,7 @@ const UserRegistrationForm = () => {
   };
 
   return (
-    <GridContainer container justifyContent="center">
+    <GridContainer container justifyContent="center" sx={{ padding:'12px'}}>
       <ToastContainer
         position="top-right"
         autoClose={3000}

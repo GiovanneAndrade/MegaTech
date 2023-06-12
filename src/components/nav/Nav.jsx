@@ -31,13 +31,19 @@ import {
   getFromLocalStorage,
   removeFromLocalStorage,
 } from "../../localStorage/LocalStorage";
+import { UserContext } from "../../contexts/UserContext";
 export const Nav = () => {
   const [notifications, setNotifications] = React.useState(1);
+  const { showOtherComponent, setShowOtherComponent } = React.useContext(UserContext);
   const { showCategory, setShowCategory } = React.useContext(CategoriesContext);
   const navigate = useNavigate();
   function home() {
     navigate("/");
     setShowCategory(true);
+  }
+  function userMessage() {
+    navigate("/user") 
+    setShowOtherComponent("message")
   }
   function pedidos() {
     if (newOrder) {
@@ -120,6 +126,7 @@ export const Nav = () => {
                 }}
               >
                 <NotificationsActiveIcon
+                 onClick={userMessage}
                   sx={{
                     color: "#f6ae2d",
                     cursor: "pointer",

@@ -26,6 +26,8 @@ import { Saved } from "../creditCard/Saved";
 import pare from "../../assets/images/pare.gif";
 import { NewContainerHome } from "../../pages/historic/Historic";
 import { ContainerHome } from "../../pages/home/Home";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const steps = [
   "Confirme os produtos",
   "Escolha o endereço",
@@ -61,17 +63,19 @@ export default function HorizontalLinearStepper() {
   };
 
   const handleNext = async (activeStep, finalOrder, postOrder) => {
-    if (!isTotal || isTotal.length === 0) return alert("Escolha um produto");
+    if (!isTotal || isTotal.length === 0) {
+      return toast.info("Escolha um Produto!");
+    }
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
     if (activeStep === 1 && !selectedAddress) {
-      return alert("Escolha o Endereço");
+      return  toast.info("Escolha o Endereço!");
     }
     if (activeStep === 2 && !showCard) {
-      return alert("Adicione ou Escolha o Cartão de Pagamento");
+      return  toast.info("Adicione ou Escolha o Cartão de Pagamento!")
     }
     if (activeStep === 2) {
       const hasError = await postOrder(finalOrder);
@@ -112,6 +116,13 @@ export default function HorizontalLinearStepper() {
     setActiveStep(0);
   };
 
+  React.useEffect(() => {
+    const selectedProducts = getFromLocalStorage("selectedProducts");
+    if (!selectedProducts) {
+      setIsTotal([]);
+    }
+  }, []);
+
   const megaTechCart = getFromLocalStorage("megaTechCart");
   const existingProducts =
     JSON.parse(localStorage.getItem("selectedProducts")) || [];
@@ -122,8 +133,8 @@ export default function HorizontalLinearStepper() {
 
   const myToken = getFromLocalStorage("megaTechAuth");
   return (
-    <Box sx={{ width: "100%"}}>
-      <Stepper activeStep={activeStep} sx={{paddingBottom:'20px' }}>
+    <Box sx={{ width: "100%" }}>
+      <Stepper activeStep={activeStep} sx={{ paddingBottom: "20px" }}>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};

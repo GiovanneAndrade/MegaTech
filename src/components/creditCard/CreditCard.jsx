@@ -148,7 +148,7 @@ const Input = styled.input`
   font-size: 16px;
   margin-bottom: 20px;
   padding: 10px;
-  width: 60%;
+  width: 100%;
   text-align: center;
   &:focus {
     border-bottom: 1px solid #000;

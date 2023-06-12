@@ -8,7 +8,10 @@ import { IconButton } from "@material-ui/core";
 import { OrderContext } from "../../contexts/OrderContext";
 import { AnddressContext } from "../../contexts/Anddress";
 import { makeStyles } from "@material-ui/core/styles";
-import { getFromLocalStorage } from "../../localStorage/LocalStorage";
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+} from "../../localStorage/LocalStorage";
 
 export const CloseOrder = ({
   img,
@@ -38,7 +41,6 @@ export const CloseOrder = ({
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
-
     if (event.target.checked) {
       const selectedProduct = {
         id,
@@ -50,6 +52,7 @@ export const CloseOrder = ({
       };
       const existingProducts =
         JSON.parse(localStorage.getItem("selectedProducts")) || [];
+      console.log(existingProducts);
       const index = existingProducts.findIndex((product) => product.id === id);
 
       if (index !== -1) {
@@ -81,6 +84,7 @@ export const CloseOrder = ({
   };
 
   React.useEffect(() => {
+    removeFromLocalStorage("selectedProducts");
     const existingProducts =
       JSON.parse(localStorage.getItem("selectedProducts")) || [];
     const foundIndex = productSelection?.findIndex(
@@ -135,7 +139,7 @@ export const CloseOrder = ({
           </div>
         </div>
         <div className="closeOrderQuantitys">
-          <h3 >quantidade</h3>
+          <h3>quantidade</h3>
           <div className="closeOrderQuantity">
             <IconButton onClick={handleDecrement}>
               <RemoveIcon />
