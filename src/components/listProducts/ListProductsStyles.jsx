@@ -10,14 +10,14 @@ export const ListProductsContainer = styled.div`
   gap: 2.5rem;
   padding-left: 580px;
   padding-right: 5px;
-  overflow-x: scroll;
-
+  overflow-x: auto;
+  scroll-behavior: smooth;
   ::-webkit-scrollbar {
     display: none;
   }
   @media screen and (max-width: 768px) {
     width: 100%;
-    padding-left: 1020px;
+    padding-left: 906px;
     ${(props) => {
       if (props.type === "isCategory") {
         return `
@@ -48,9 +48,35 @@ export const HomeContainer = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  overflow: hidden;
-`;
+  overflow: auto;
+  .buttonLeft,
+  .buttonRight {
+    width: 50px;
+    height: 85%;
+    // display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 30px;
+    display: ${(props) => (props.showCategory ? "flex" : "none")};
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
 
+  .buttonLeft.hovered,
+  .buttonRight.hovered {
+    background-color: #f6ae2d;
+    color: #fff;
+  }
+  // overflow: hidden;
+`;
+export const ScrollContainer = styled.div`
+  width: 100%;
+  overflow-x: auto;
+`;
 export const Prev = styled.div`
   width: 50px;
   height: 100px;

@@ -5,17 +5,23 @@ import { ContainerRightInternal } from "./ContainerRightStyles";
 import { CategoriesContext } from "../../contexts/Categories";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 export const ContainerRight = () => {
-  const { category } = React.useContext(CategoriesContext);
+  const { category, showCategory } = React.useContext(CategoriesContext);
   const [scroll, setScroll] = useState(false);
-  function showScroll() {
-    setScroll(true);
+  console.log(scroll);
+  React.useEffect(() => {
     if (scroll) {
       window.scrollTo({
-        top: 0,  
-        behavior: "smooth"
+        top: 0,
+        behavior: "smooth",
       });
     }
+    setScroll(false);
+  }, [scroll]);
+
+  function showScroll() {
+    setScroll(true);
   }
+
   return (
     <ContainerRightInternal>
       {category?.map((category) => (
@@ -29,7 +35,7 @@ export const ContainerRight = () => {
         </>
       ))}
       <div className="scroll-to-top" onClick={showScroll}>
-        <ArrowCircleUpIcon  style={{ fontSize: 60, color:'#32357b' }} />
+        <ArrowCircleUpIcon style={{ fontSize: 60, color: "#32357b" }} />
       </div>
     </ContainerRightInternal>
   );
