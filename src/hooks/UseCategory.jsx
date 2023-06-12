@@ -1,19 +1,28 @@
 import React, { useState } from "react";
 import { CategoriesContext } from "../contexts/Categories";
+import { useNavigate } from "react-router-dom";
 
 // Hook customizado para gerenciar o estado das categorias selecionadas
 export function useCategorySelection(initialCategory) {
-  const { showCategory, setShowCategory , isCategory, setIsCategory} = React.useContext(CategoriesContext);
-  
+  const {
+    showCategory,
+    setAnchorEl,
+    setShowCategory,
+    isCategory,
+    anchorEl,
+    setIsCategory,
+  } = React.useContext(CategoriesContext);
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] =
     React.useState(initialCategory);
-
-  const handleCategoryClick = (category) => {
  
+  const handleCategoryClick = (category) => {
     setSelectedCategory(category?.name);
-    setIsCategory(category)
-    if(showCategory){
-      setShowCategory(false)
+    setIsCategory(category);
+    if (showCategory || anchorEl) {
+      setShowCategory(false);
+      setAnchorEl(null);
+      navigate("/");
     }
   };
 
@@ -21,7 +30,8 @@ export function useCategorySelection(initialCategory) {
 }
 
 export const usePopover = () => {
-  const { anchorEl, setAnchorEl, category } = React.useContext(CategoriesContext);
+  const { anchorEl, setAnchorEl, category } =
+    React.useContext(CategoriesContext);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
