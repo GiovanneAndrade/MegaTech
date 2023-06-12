@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { CategoriesContext } from "../../contexts/Categories";
-import { Titles } from "../../components/title/Title";
+import { Title, Titles } from "../../components/title/Title";
 import { ListProducts } from "../../components/listProducts/ListProducts";
 import { ContainerRightInternal } from "../../components/containerRight/ContainerRightStyles";
 import { getFromLocalStorage } from "../../localStorage/LocalStorage";
@@ -8,8 +8,10 @@ import { ProductContext } from "../../contexts/ProductContext";
 import Success from "../../components/lottie/Success";
 import isResult from "../../assets/images/error.json";
 import styled from "styled-components";
+import CustomIcons from "../../components/Pagintion/Pagintion";
+import { Box } from "@mui/material";
 export const ShowCategory = () => {
-  const { showCategory, setShowCategory, isCategory, setIsCategory } =
+  const { category, setShowCategory, isCategory, setIsCategory, showCategory } =
     React.useContext(CategoriesContext);
   const {
     productOverview,
@@ -33,7 +35,7 @@ export const ShowCategory = () => {
           behavior: "smooth",
         });
       }
-      if (inputScroll) {
+      if (inputScroll || !showCategory) {
         window.scrollTo({
           top: 600,
           behavior: "smooth",
@@ -41,7 +43,7 @@ export const ShowCategory = () => {
       }
       setScroll(false);
     }
-  }, [isCategory, productOverview]);
+  }, [isCategory, productOverview, showCategory]);
 
   return (
     <ContainerRightInternal>
@@ -57,6 +59,9 @@ export const ShowCategory = () => {
           category={isCategory}
         />
       )}
+      <PagintionContainer>
+        <CustomIcons />
+      </PagintionContainer>
     </ContainerRightInternal>
   );
 };
@@ -64,4 +69,8 @@ export const ShowCategory = () => {
 export const IsResul = styled.div`
   width: 100%;
   height: 100%;
+`;
+export const PagintionContainer = styled(Title)`
+  display: flex;
+  justify-content: center;
 `;
