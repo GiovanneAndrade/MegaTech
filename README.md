@@ -8,7 +8,6 @@ O aplicativo conta com uma API RESTful personalizada construída com NodeJS que 
 
 - Navegação de produtos: os usuários podem navegar por todos os produtos disponíveis, bem como filtrar e classificar os produtos por várias categorias e atributos.
  - Carrinho de compras: os usuários podem adicionar produtos ao seu carrinho e ver um resumo do seu carrinho antes de fazer o checkout.
- - Carrinho de compras: os usuários podem adicionar produtos ao seu carrinho e ver um resumo do seu carrinho antes de fazer o checkout.
  - Checkout: os usuários podem preencher suas informações de envio e pagamento para concluir suas compras.
  - Conta de usuário: os usuários podem se cadastrar, fazer login e ver o histórico de seus pedidos.
  - Gerenciamento de Estoque: O aplicativo permite o rastreamento do estoque de produtos em tempo real, informando automaticamente os usuários quando um item está fora de estoque.
@@ -34,8 +33,8 @@ As seguintes ferramentas e frameworks foram utilizados na construção do projet
 ## Como usar
 
 1. Clonar este repositório
-2. Clone o repositório de back-end em https://github.com/GiovanneAndrade/myLinks-back
-3. Siga as instruções para executar o back-end em https://github.com/GiovanneAndrade/myLinks-back
+2. Clone o repositório de back-end em https://github.com/GiovanneAndrade/megaTech-back
+3. Siga as instruções para executar o back-end
 4. Instale as dependências
 
 ```bash
