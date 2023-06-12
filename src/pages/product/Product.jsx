@@ -3,9 +3,7 @@ import { Nav } from "../../components/nav/Nav";
 import ProductOverview from "../../components/ProductOverview/ProductOverview";
 import { CategoriesContext } from "../../contexts/Categories";
 import { ShowCategory } from "../categories/ShowCategory";
-import Teste, { ProductContainer } from "../../../teste/Teste";
-import { ListProducts } from "../../components/listProducts/ListProducts";
-import { Titles } from "../../components/title/Title";
+
 import {
   ContainerProductList,
   ProductOverviewContainer,
