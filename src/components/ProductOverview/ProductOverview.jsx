@@ -12,10 +12,13 @@ import { ButtonsStyles } from "./ProductOverviewStyles";
 import { Buttons } from "../button/Button";
 import { ProductContext } from "../../contexts/ProductContext";
 import { getFromLocalStorage } from "../../localStorage/LocalStorage";
+import { CategoriesContext } from "../../contexts/Categories";
 const ProductOverview = () => {
   const myToken = getFromLocalStorage("megaTechAuth");
   const { productOverview, setProductOverview, scroll, setScroll } =
     React.useContext(ProductContext);
+  const { isCategory, category, setIsCategory } =
+    React.useContext(CategoriesContext);
   const [selectColor, setSelectColor] = useState("");
   //const [scroll, setScroll] = useState(false);
   function color(isColor) {
@@ -24,7 +27,14 @@ const ProductOverview = () => {
   function showScroll() {
     setScroll(true);
   }
-
+console.log(productOverview)
+  const previousPrice = isCategory?.products?.filter(
+    (product) => product?.id === productOverview?.id
+  )[0]?.PriceHistory;
+  const newPrice = productOverview?.price;
+  const newPreviousPrice = !previousPrice ? newPrice : previousPrice[0]?.previousPrice;
+  const discount = newPreviousPrice > newPrice ? true : false;
+  
   React.useEffect(() => {
     if (scroll) {
       window.scrollTo({
@@ -33,6 +43,29 @@ const ProductOverview = () => {
       });
     }
   }, [scroll, productOverview]);
+
+  let productToCategory = {};
+  category?.forEach((cat) => {
+    cat.products.forEach((product) => {
+      productToCategory[product.id] = cat;
+    });
+  });
+  let productId = productOverview?.id;
+  let foundCategory = productToCategory[productId];
+
+  React.useEffect(() => {
+    const toLocal = getFromLocalStorage("productOverview");
+    if (!productOverview) {
+      setProductOverview(toLocal);
+    }
+    if (isCategory?.length === 0) {
+      setIsCategory(toLocal?.category);
+    }
+    if (!isCategory) {
+      setIsCategory(foundCategory);
+    }
+  }, []);
+
   return (
     <ProductContainer color={selectColor} myToken={myToken}>
       <div className="product">
@@ -57,9 +90,7 @@ const ProductOverview = () => {
           </div>
         </div>
         <div className="information">
-          <h2>
-            Purificador de Água Electrolux PE11X Prata com Painel Touch - Bivolt
-          </h2>
+          <h2>{productOverview?.name}</h2>
           <Stack
             spacing={1}
             sx={{
@@ -85,16 +116,17 @@ const ProductOverview = () => {
             <div className="color3" onClick={() => color("color3")}></div>
           </div>
           <div className="newPrice">
-            <h3 className="price"> R$ 4000 </h3>
-            <div>
-              <h2> R$4000 </h2>
-              <ArrowDownwardIcon />
-               
-            </div>
+            <h3 className="price"> R$ {productOverview?.price} </h3>
+            {discount ? (
+              <div>
+                <h2> R$ {previousPrice[0]?.previousPrice} </h2>
+                <ArrowDownwardIcon />
+              </div>
+            ) : null}
           </div>
 
           <div className="card">
-            <CreditCardIcon /> 10x1000
+            <CreditCardIcon /> 10x{productOverview?.price / 10}
           </div>
           <p
             onClick={showScroll}
@@ -102,7 +134,7 @@ const ProductOverview = () => {
           >
             outras ofertas deste mesmo produto
           </p>
-
+          <p> {productOverview?.stoke} disponível</p>
           <ButtonsStyles>
             <Buttons
               text={"adicionar ao carrinho"}
@@ -114,7 +146,7 @@ const ProductOverview = () => {
               text={"comprar agora"}
               typeButton={"/shopping"}
               productOverview={productOverview}
-              variant={'contained'}
+              variant={"contained"}
             />
           </ButtonsStyles>
         </div>
@@ -130,8 +162,8 @@ export const ProductContainer = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: 600px) {
-      margin-top:50px;
-    }
+    margin-top: 50px;
+  }
   .product {
     width: 70%;
     height: 80%;
@@ -140,7 +172,7 @@ export const ProductContainer = styled.div`
     // background:#000;
     @media (max-width: 600px) {
       width: 85%;
-      height: ${props => props.myToken?'65%':'70%'};
+      height: ${(props) => (props.myToken ? "65%" : "70%")};
       flex-direction: column;
       align-items: center;
     }
@@ -154,7 +186,6 @@ export const ProductContainer = styled.div`
         align-items: center;
         width: 100%;
         height: 80%;
-        
       }
       .carousel-container {
         width: 100%;
@@ -209,7 +240,7 @@ export const ProductContainer = styled.div`
       //  background-color: #b7b7b8;
       @media (max-width: 600px) {
         padding: 0;
-       /// align-items: center;
+        /// align-items: center;
         width: 100%;
       }
     }
@@ -304,13 +335,13 @@ export const ProductContainer = styled.div`
       text-decoration: line-through;
       color: #fff;
       @media (max-width: 600px) {
-       margin-bottom:29px;
-       font-size: 15px;
+        margin-bottom: 29px;
+        font-size: 15px;
       }
     }
     .newPrice div {
       display: flex;
-      width: 80px;
+      min-width: 80px;
       height: 30px;
       align-items: center;
       justify-content: center;
@@ -324,7 +355,7 @@ export const ProductContainer = styled.div`
       padding: 0px 5px;
       @media (max-width: 600px) {
         width: 100px;
-       text-align: center;
+        text-align: center;
       }
     }
   }
