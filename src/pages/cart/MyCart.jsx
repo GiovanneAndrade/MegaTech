@@ -47,8 +47,9 @@ function MyCart() {
   const navigate = useNavigate();
   const classes = useStyles();
 
-  const { items, handleAddItem, handleRemoveItem, handleDeleteItem, subtotal } =
+  const { items, showProduct, handleAddItem, handleRemoveItem, handleDeleteItem, subtotal } =
     useShoppingCart();
+
   return (
     <>
       <Nav />
@@ -59,7 +60,11 @@ function MyCart() {
           <NewList>
             {items.map((item) => (
               <NewListItem key={item.id}>
-                <LeftBox>
+                <LeftBox 
+                   onClick={() =>
+                    showProduct(item?.name, item?.price, item?.image, item?.description, 1, item?.id, item?.category, item?.stoke)
+                  }
+                >
                   <ListItemAvatar>
                     <img
                       src={item.image}
@@ -133,6 +138,7 @@ export const RootCard = styled(Card)`
 `;
 export const LeftBox = styled(Box)`
   display: flex;
+  cursor: pointer;
 `;
 
 export const WebBox = styled(Box)`
