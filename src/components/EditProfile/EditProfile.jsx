@@ -19,8 +19,10 @@ import { Help } from "./UserProfileComponents/Help";
 import { EditAppearance } from "./UserProfileComponents/EditAppearance";
 import { EditSecurity } from "./UserProfileComponents/EditSecurity";
 import { Message } from "./UserProfileComponents/Message";
+import { UserContext } from "../../contexts/UserContext";
 function EditProfile() {
-  const [showOtherComponent, setShowOtherComponent] = useState("editProfile");
+  const { showOtherComponent, setShowOtherComponent } =
+    React.useContext(UserContext);
 
   const handleClick = (componentName) => {
     setShowOtherComponent(componentName);
@@ -107,6 +109,7 @@ export default EditProfile;
 export const EditProfileContainer = styled(NewContainerHome)`
   background: #fff;
   width: 40%;
+  padding-left: 0px;
   // border-radius: 0;
   //height: 40%;
 
@@ -115,7 +118,7 @@ export const EditProfileContainer = styled(NewContainerHome)`
     border-right: solid 5px #f6ae2d;
     display: flex;
     text-align: center;
-   //transition: height 0.7s ease, border-right 0.3s ease;
+    //transition: height 0.7s ease, border-right 0.3s ease;
   }
   flex-direction: row;
   .menuLeft {
@@ -123,15 +126,22 @@ export const EditProfileContainer = styled(NewContainerHome)`
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: left;
     border-right: solid 0.5px #dadada;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
     font-size: 15px;
     gap: 35px;
     list-style: none;
-
+   
+    li {
+      width: 100%;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+  
+    }
     // background: #000;
   }
   .menuRight {
@@ -150,12 +160,12 @@ export const EditProfileContainer = styled(NewContainerHome)`
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 10px 10px 0 40px;
+    padding: 10px 10px 0 0px;
     width: 100%;
     gap: 15px;
-    height: 40px; 
-    border-right: solid 5px transparent;  
-   // transition:  border-right 0.3s ease;
+    height: 40px;
+    border-right: solid 5px transparent;
+    // transition:  border-right 0.3s ease;
   }
   .icon {
     color: #f6ae2d !important;
@@ -190,10 +200,10 @@ export const EditProfileContainer = styled(NewContainerHome)`
       flex-direction: row;
       overflow: scroll;
       gap: 5px;
-      padding-left: 400px;
+      padding-left: 10px;
       border-radius: 0;
     }
-    .menuRight{
+    .menuRight {
       min-width: 109%;
     }
     li {
@@ -204,16 +214,16 @@ export const EditProfileContainer = styled(NewContainerHome)`
     .selected {
       height: 50px;
       //  background: blue;
-     // min-width: 150px;
-      border-right: 0 ;
+      // min-width: 150px;
+      border-right: 0;
       border-bottom: solid 7px #f6ae2d;
       /*  display: flex;
       text-align: center;
       transition: height 0.7s ease, border-right 0.3s ease; */
     }
-    .scroll{
+    .scroll {
       display: flex;
-      overflow-x: hidden;
+     // overflow-x: hidden;
       width: 100%;
     }
   }
