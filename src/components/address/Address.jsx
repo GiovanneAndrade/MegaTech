@@ -42,14 +42,13 @@ export function AddAnddress() {
     }));
   }
 
- 
   function handleBuscardistrict() {
     buscardistrict(myAnddress.cep);
   }
   const { createAnddress } = AddAddress();
   return (
     <AddAnddressContainer>
-      <Grid container spacing={2} sx={{ width: "50%" }}>
+      <Grid container  sx={{ width: { sm: "50%", xs: "100%" }, gap:'15px'  }}>
         <Grid item xs={12}>
           <TextField
             fullWidth
@@ -144,9 +143,7 @@ export default function AddressSummary({ newAnddress }) {
     React.useContext(AnddressContext);
 
   return (
-    <FormControl
-      sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
-    >
+    <FormControl >
       <FormLabel sx={{ mr: 2 }}>Selecione um endereço:</FormLabel>
       <RadioGroup
         aria-label="Selecione um endereço"
@@ -154,24 +151,24 @@ export default function AddressSummary({ newAnddress }) {
         name="address"
       >
         {newAnddress.map((a) => (
-          <FormControlLabel
-            key={a.id}
-            value={a.id}
-            control={<Radio />}
-            label={
-              <NewCard>
+          <NewCard>
+            <FormControlLabel
+              key={a.id}
+              value={a.id}
+              control={<Radio />}
+              label={
                 <CardContent>
                   <Typography variant="h6" component="h2">
                     {a.name_recipient}
                   </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  <Typography sx={{ mb: 0 }} color="text.secondary">
                     {a.district}, {a.city} - {a.uf}, {a.cep}
                   </Typography>
                 </CardContent>
-              </NewCard>
-            }
-            onClick={() => setSelectedAddress(a)}
-          />
+              }
+              onClick={() => setSelectedAddress(a)}
+            />
+          </NewCard>
         ))}
       </RadioGroup>
     </FormControl>
