@@ -16,9 +16,11 @@ import { ProductContext } from "../../contexts/ProductContext";
 import { UserContext } from "../../contexts/UserContext";
 import { CategoriesContext } from "../../contexts/Categories";
 import { ShowCategory } from "../categories/ShowCategory";
+import { CardsSkeleton } from "../../components/skeletons/CardsSkeleton";
 
 export const Home = () => {
-  const { showCategory, setShowCategory } = React.useContext(CategoriesContext);
+  const { showCategory, setShowCategory, category } =
+    React.useContext(CategoriesContext);
   const { cart } = React.useContext(CartContext);
   const { Favorites } = React.useContext(FavoritesContext);
   const { Order } = React.useContext(OrderContext);
@@ -38,13 +40,29 @@ export const Home = () => {
             </div>
             <ContainerLeft />
           </div>
-          {showCategory ? <ContainerRight /> : <ShowCategory />}
+          {!category ? (
+            <Skeleton>
+              <CardsSkeleton />
+              <CardsSkeleton />
+            </Skeleton>
+          ) : showCategory ? (
+            <ContainerRight />
+          ) : (
+            <ShowCategory />
+          )}
         </Conteiner>
       </ContainerHome>
     </>
   );
 };
 
+export const Skeleton = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  
+  height: 100vh;
+`;
 export const ContainerHome = styled.div`
   width: 100%;
   height: 100%;
