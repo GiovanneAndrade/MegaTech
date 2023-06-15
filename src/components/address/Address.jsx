@@ -10,8 +10,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddressMap from "./AddressMap";
 
 export function AddAnddress() {
-  const { newAnddress, setNewAnddress, myAnddress, setMyAddress } =
-    React.useContext(AnddressContext);
+  const {
+    newAnddress,
+    setNewAnddress,
+    myAnddress,
+    setMyAddress,
+    wait,
+    setWait,
+  } = React.useContext(AnddressContext);
 
   function buscardistrict(cep) {
     axios
@@ -45,10 +51,14 @@ export function AddAnddress() {
   function handleBuscardistrict() {
     buscardistrict(myAnddress.cep);
   }
+  function isFieldsEmpty() {
+    const { name_recipient, district, city, uf, cep } = myAnddress;
+    return !name_recipient || !district || !city || !uf || !cep;
+  }
   const { createAnddress } = AddAddress();
   return (
     <AddAnddressContainer>
-      <Grid container  sx={{ width: { sm: "50%", xs: "100%" }, gap:'15px'  }}>
+      <Grid container sx={{ width: { sm: "50%", xs: "100%" }, gap: "15px" }}>
         <Grid item xs={12}>
           <TextField
             fullWidth
@@ -113,7 +123,12 @@ export function AddAnddress() {
           xs={12}
           sx={{ width: "100%", display: "flex", justifyContent: "end" }}
         >
-          <Button variant="contained" color="primary" onClick={createAnddress}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={createAnddress}
+            disabled={isFieldsEmpty() || wait}
+          >
             Adicionar Endereço
           </Button>
         </Grid>
@@ -122,7 +137,12 @@ export function AddAnddress() {
         {newAnddress.length === 0 ? (
           "Não existe endereço cadastrado"
         ) : (
-          <AddressSummary newAnddress={newAnddress} />
+          <>
+            <AddressSummary newAnddress={newAnddress} />
+            {wait ? <NewCard>
+              <AddressSkeleton/>
+            </NewCard> : null}
+          </>
         )}
       </AddAnddressSummary>
     </AddAnddressContainer>
@@ -137,13 +157,14 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import AddressSkeleton from "../skeletons/AddressSkeleton";
 
 export default function AddressSummary({ newAnddress }) {
   const { selectedAddress, setSelectedAddress } =
     React.useContext(AnddressContext);
 
   return (
-    <FormControl >
+    <FormControl>
       <FormLabel sx={{ mr: 2 }}>Selecione um endereço:</FormLabel>
       <RadioGroup
         aria-label="Selecione um endereço"

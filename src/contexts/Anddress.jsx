@@ -5,6 +5,7 @@ export const AnddressContext = React.createContext({});
 
 export const AnddressProvider = (props) => {
   const [selectedAddress, setSelectedAddress] = useState();
+  const [wait, setWait] = useState(false);
   const [newAnddress, setNewAnddress] = useState([]);
   const [myAnddress, setMyAddress] = useState({
     name_recipient: "",
@@ -13,7 +14,7 @@ export const AnddressProvider = (props) => {
     uf: "",
     cep: "",
   });
-  
+
   useEffect(() => {
     const address = getAddress();
     address
@@ -34,6 +35,8 @@ export const AnddressProvider = (props) => {
         setMyAddress,
         selectedAddress,
         setSelectedAddress,
+        wait,
+        setWait,
       }}
     >
       {props.children}

@@ -6,19 +6,21 @@ import { CategoriesContext } from "../contexts/Categories";
 import { ProductContext } from "../contexts/ProductContext";
 
 export const AddAddress = () => {
-  const { myAnddress, newAnddress, setNewAnddress } =
+  const { myAnddress, newAnddress, setNewAnddress, wait, setWait } =
     React.useContext(AnddressContext);
   function createAnddress() {
     const myToken = getFromLocalStorage("megaTechAuth");
     const anddress = postAnddress(myAnddress, myToken?.id);
+    setWait(true)
     anddress
       .then((response) => {
         console.log(response.data);
-
+        setWait(false)
         setNewAnddress([...newAnddress, response.data]);
       })
       .catch((error) => {
         console.log(error.response.data.message);
+        setWait(false)
         alert(error.response.status);
       });
   }
