@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 export const ProductsContainer = styled.div`
   display: flex;
+  max-width: 200px;
   min-width: 200px;
   height: 350px;
+  max-height: 500px;
   background: #fff;
   flex-direction: column;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4),
@@ -32,7 +34,7 @@ export const ImageContainer = styled.div`
   border-radius: 5px 5px 5px 5px;
   img {
     padding: 10px;
-    max-width: 130px;
+    max-width: 190px;
     @media (max-width: 600px) {
       //padding: 35px;
      // max-width: 90px;

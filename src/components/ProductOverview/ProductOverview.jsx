@@ -27,14 +27,15 @@ const ProductOverview = () => {
   function showScroll() {
     setScroll(true);
   }
-console.log(productOverview)
   const previousPrice = isCategory?.products?.filter(
     (product) => product?.id === productOverview?.id
   )[0]?.PriceHistory;
   const newPrice = productOverview?.price;
-  const newPreviousPrice = !previousPrice ? newPrice : previousPrice[0]?.previousPrice;
+  const newPreviousPrice = !previousPrice
+    ? newPrice
+    : previousPrice[0]?.previousPrice;
   const discount = newPreviousPrice > newPrice ? true : false;
-  
+
   React.useEffect(() => {
     if (scroll) {
       window.scrollTo({
@@ -65,7 +66,6 @@ console.log(productOverview)
       setIsCategory(foundCategory);
     }
   }, []);
-
   return (
     <ProductContainer color={selectColor} myToken={myToken}>
       <div className="product">
@@ -77,15 +77,20 @@ console.log(productOverview)
               autoPlay={true}
               infiniteLoop={true}
             >
-              <div>
-                <img src={productOverview?.image} alt="Product 1" />
-              </div>
-              <div>
-                <img src={img2} alt="Product 2" />
-              </div>
-              <div>
-                <img src={img3} alt="Product 3" />
-              </div>
+              {productOverview?.image.length === 0 ? (
+                <div>
+                  <img
+                    src="https://emdiabetes.com.br/wp-content/uploads/2017/09/breve.jpg"
+                    alt="Product 1"
+                  />
+                </div>
+              ) : (
+                productOverview?.image?.map((img) => (
+                  <div>
+                    <img src={img?.url} alt="Product 1" />
+                  </div>
+                ))
+              )}
             </Carousel>
           </div>
         </div>

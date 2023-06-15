@@ -24,7 +24,7 @@ import useShoppingCart from "../../hooks/UseCart";
 export const Products = ({
   name,
   avaliações,
-  image,
+  images,
   description,
   quantity,
   id,
@@ -34,7 +34,6 @@ export const Products = ({
 }) => {
   const navigate = useNavigate();
   const [checked, setChecked] = useState(false);
- 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const { productOverview, setProductOverview } =
     React.useContext(ProductContext);
@@ -69,13 +68,13 @@ export const Products = ({
       const hasError = await removeFavorites(id);
     }
   }
-
+  const image = images.length === 0 ? 'https://emdiabetes.com.br/wp-content/uploads/2017/09/breve.jpg' :images[0]?.url
   return (
     <ProductsContainer>
     
       <ImageContainer
         onClick={() =>
-          showProduct(name, avaliações, image, description, 1, id, category, stoke, productOverview)
+          showProduct(name, avaliações, images, description, 1, id, category, stoke, productOverview)
         }
       >
         <img src={image} />
@@ -83,7 +82,7 @@ export const Products = ({
       <InformationProducts>
         <h1
           onClick={() =>
-            showProduct(name, avaliações, image, description, 1, id, category, stoke, productOverview)
+            showProduct(name, avaliações, images, description, 1, id, category, stoke, productOverview)
           }
         >
           {name}
@@ -91,7 +90,7 @@ export const Products = ({
 
         <p
           onClick={() =>
-            showProduct(name, avaliações, image, description, 1, id, category, stoke, productOverview)
+            showProduct(name, avaliações, images, description, 1, id, category, stoke, productOverview)
           }
         >
           {" "}

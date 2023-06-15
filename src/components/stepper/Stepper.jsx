@@ -171,7 +171,7 @@ export default function HorizontalLinearStepper() {
                 {megaTechCart?.map((i) => (
                   <CloseOrder
                     id={i?.id}
-                    img={i?.image}
+                    img={i?.image.map((i) => i.url)}
                     quantitys={i?.quantity}
                     price={i?.price}
                     name={i?.name}

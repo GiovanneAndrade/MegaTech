@@ -43,7 +43,7 @@ export const ListProducts = ({ products, type, category }) => {
           <Products
             name={product.name}
             avaliações={product.price}
-            image={product?.image}
+            images={product?.images}
             description={product.description}
             quantity={product?.quantity}
             stoke={product?.stoke}

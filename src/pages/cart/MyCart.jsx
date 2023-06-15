@@ -47,9 +47,14 @@ function MyCart() {
   const navigate = useNavigate();
   const classes = useStyles();
 
-  const { items, showProduct, handleAddItem, handleRemoveItem, handleDeleteItem, subtotal } =
-    useShoppingCart();
-
+  const {
+    items,
+    showProduct,
+    handleAddItem,
+    handleRemoveItem,
+    handleDeleteItem,
+    subtotal,
+  } = useShoppingCart();
   return (
     <>
       <Nav />
@@ -60,14 +65,27 @@ function MyCart() {
           <NewList>
             {items.map((item) => (
               <NewListItem key={item.id}>
-                <LeftBox 
-                   onClick={() =>
-                    showProduct(item?.name, item?.price, item?.image, item?.description, 1, item?.id, item?.category, item?.stoke)
+                <LeftBox
+                  onClick={() =>
+                    showProduct(
+                      item?.name,
+                      item?.price,
+                      item?.image,
+                      item?.description,
+                      1,
+                      item?.id,
+                      item?.category,
+                      item?.stoke
+                    )
                   }
                 >
                   <ListItemAvatar>
                     <img
-                      src={item.image}
+                      src={
+                        item?.image.length > 0
+                          ? item?.image[0].url
+                          : "https://emdiabetes.com.br/wp-content/uploads/2017/09/breve.jpg"
+                      }
                       alt={item.name}
                       className={classes.productImage}
                     />
@@ -205,7 +223,7 @@ export const NewListItem = styled(ListItem)`
     padding-right: 0;
     font-size: 13px;
     gap: 5px;
-  /*   background: #eee;
+    /*   background: #eee;
     box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
     border-radius: 4px; */
   }
