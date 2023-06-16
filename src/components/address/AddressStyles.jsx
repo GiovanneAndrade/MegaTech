@@ -12,6 +12,13 @@ export const AddAnddressContainer = styled.form`
   display: flex;
   gap: 100px;
   padding: 10px;
+  .message{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   @media screen and (max-width: 768px) {
     flex-direction: column;
     gap: 50px;
