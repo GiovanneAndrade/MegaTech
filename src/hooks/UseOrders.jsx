@@ -53,13 +53,14 @@ export const useCancelOrder = () => {
 };
 
 export function useCreateOrder() {
-  const { errorOrder, setErrorOrder, order, setOrder, setNewOrder, newOrder } =
+  const { errorOrder, wait, setWait, setNewOrder, newOrder } =
     React.useContext(OrderContext);
     const myToken = getFromLocalStorage("megaTechAuth");
   async function postOrder(finalOrder) {
+    setWait(true)
     try {
       const myOrder = await postRequest(finalOrder, myToken?.id);
-      console.log(myOrder.data);
+      setWait(false)
       if (!newOrder) {
         setNewOrder(true);
       }else{
@@ -68,8 +69,9 @@ export function useCreateOrder() {
 
       return false;
     } catch (error) {
+      setWait(false)
       console.log(error.response.data.message);
-      alert(error.response.status);
+      //alert(error.response.status);
       return true;
     }
   }

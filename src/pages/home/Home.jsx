@@ -17,6 +17,10 @@ import { UserContext } from "../../contexts/UserContext";
 import { CategoriesContext } from "../../contexts/Categories";
 import { ShowCategory } from "../categories/ShowCategory";
 import { CardsSkeleton } from "../../components/skeletons/CardsSkeleton";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AnddressContext } from "../../contexts/Anddress";
+import GlobalModal from "../../components/orderComplete/GlobalModal";
 
 export const Home = () => {
   const { showCategory, setShowCategory, category } =
@@ -25,12 +29,14 @@ export const Home = () => {
   const { Favorites } = React.useContext(FavoritesContext);
   const { Order } = React.useContext(OrderContext);
   const { Payment } = React.useContext(PaymentContext);
-
+  const { wait, setWait } = React.useContext(ProductContext);
   const { User } = React.useContext(UserContext);
+
   return (
     <>
       <Nav />
       <Banner />
+      <GlobalModal wait={wait} message={"Aguarde..."} />
       <ContainerHome>
         <Conteiner>
           <div className="containerLeft">
@@ -38,7 +44,6 @@ export const Home = () => {
             <div className="banner">
               <button>Ir Agora</button> 50% de Desconto
             </div>
-            <ContainerLeft />
           </div>
           {!category ? (
             <Skeleton>
@@ -60,7 +65,6 @@ export const Skeleton = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  
   height: 100vh;
 `;
 export const ContainerHome = styled.div`

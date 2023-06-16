@@ -7,6 +7,7 @@ export const AnddressProvider = (props) => {
   const [selectedAddress, setSelectedAddress] = useState();
   const [wait, setWait] = useState(false);
   const [newAnddress, setNewAnddress] = useState([]);
+  const [waitAddress, setWaitAddress] = useState(false);
   const [myAnddress, setMyAddress] = useState({
     name_recipient: "",
     district: "",
@@ -14,15 +15,18 @@ export const AnddressProvider = (props) => {
     uf: "",
     cep: "",
   });
-
+console.log(newAnddress)
   useEffect(() => {
     const address = getAddress();
+    setWaitAddress(false)
     address
       .then((response) => {
         setNewAnddress(response.data);
+        setWaitAddress(true)
       })
-      .catch(() => {
-        console.log("error");
+      .catch((error) => {
+        console.log(error);
+        setWaitAddress(false)
       });
   }, []);
 
@@ -37,6 +41,8 @@ export const AnddressProvider = (props) => {
         setSelectedAddress,
         wait,
         setWait,
+        waitAddress,
+        setWaitAddress,
       }}
     >
       {props.children}

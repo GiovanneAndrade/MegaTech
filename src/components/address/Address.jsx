@@ -17,6 +17,8 @@ export function AddAnddress() {
     setMyAddress,
     wait,
     setWait,
+    waitAddress,
+    setWaitAddress,
   } = React.useContext(AnddressContext);
 
   function buscardistrict(cep) {
@@ -134,14 +136,18 @@ export function AddAnddress() {
         </Grid>
       </Grid>
       <AddAnddressSummary>
-        {newAnddress.length === 0 ? (
+        {!waitAddress ? (
+          <div className="message">carregando seus endereços...</div>
+        ) : newAnddress.length === 0 ? (
           "Não existe endereço cadastrado"
         ) : (
           <>
             <AddressSummary newAnddress={newAnddress} />
-            {wait ? <NewCard>
-              <AddressSkeleton/>
-            </NewCard> : null}
+            {wait ? (
+              <NewCard>
+                <AddressSkeleton />
+              </NewCard>
+            ) : null}
           </>
         )}
       </AddAnddressSummary>

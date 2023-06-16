@@ -7,6 +7,8 @@ export const ProductProvider = (props) => {
   const [scroll, setScroll] = useState(false);
   const [inputScroll, setInputScroll] = useState(false);
   const [page, setPage] = React.useState(1);
+  const [wait, setWait] = useState(false);
+
   return (
     <ProductContext.Provider
       value={{
@@ -18,6 +20,8 @@ export const ProductProvider = (props) => {
         setInputScroll,
         page,
         setPage,
+        wait,
+        setWait,
       }}
     >
       {props.children}

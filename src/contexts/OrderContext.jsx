@@ -8,8 +8,8 @@ export const OrderProvider = (props) => {
   const [finalOrder, setFinalOrder] = React.useState();
   const [errorOrder, setErrorOrder] = React.useState(true);
   const [order, setOrder] = React.useState();
-  const [ newOrder, setNewOrder ] = React.useState(false);
- 
+  const [newOrder, setNewOrder] = React.useState(false);
+  const [wait, setWait] = useState(false);
   useEffect(() => {
     const orders = getRequests();
     orders
@@ -34,7 +34,9 @@ export const OrderProvider = (props) => {
         setErrorOrder,
         order,
         setOrder,
-        setNewOrder
+        setNewOrder,
+        wait,
+        setWait,
       }}
     >
       {props.children}

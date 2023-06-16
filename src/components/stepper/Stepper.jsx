@@ -28,6 +28,8 @@ import { NewContainerHome } from "../../pages/historic/Historic";
 import { ContainerHome } from "../../pages/home/Home";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SendingRequest from "../orderComplete/SendingRequest";
+import GlobalModal from "../orderComplete/GlobalModal";
 const steps = [
   "Confirme os produtos",
   "Escolha o endereço",
@@ -48,6 +50,8 @@ export default function HorizontalLinearStepper() {
     setErrorOrder,
     setNewOrder,
     newOrder,
+    wait, 
+    setWait
   } = React.useContext(OrderContext);
   const { newCard, setNewCard, showCard, setShowCard, saved, setSaved } =
     React.useContext(AppContext);
@@ -80,7 +84,7 @@ export default function HorizontalLinearStepper() {
     if (activeStep === 2) {
       const hasError = await postOrder(finalOrder);
       if (hasError) {
-        return;
+        return toast.error("Erro fazer pedido!")
       }
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -160,12 +164,14 @@ export default function HorizontalLinearStepper() {
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
+            <Button onClick={handleReset}>Comprar mais</Button>
           </Box>
         </React.Fragment>
       ) : (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>
+            {/* <SendingRequest wait={wait} message={'Enviando pedido'}/> */}
+            <GlobalModal wait={wait} message={"Enviando pedido, Aguarde..."} />
             {activeStep === 0 ? (
               <StepperContainer>
                 {megaTechCart?.map((i) => (
