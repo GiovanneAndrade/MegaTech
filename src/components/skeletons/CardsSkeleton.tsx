@@ -4,8 +4,8 @@ import Skeleton from "@mui/material/Skeleton";
 
 export const CardsSkeleton = () => {
   const skeletonStyles = {
-    p: 2,
-  
+    py: 2,
+    px: 1,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -17,7 +17,7 @@ export const CardsSkeleton = () => {
         <Skeleton
           sx={{ bgcolor: "grey.400" }}
           variant="rectangular"
-          width={1400}
+          width={1200}
           height={50}
         />
       </Box>
@@ -27,8 +27,8 @@ export const CardsSkeleton = () => {
             <Skeleton
               sx={{ bgcolor: "grey.100", borderRadius: "10px" }}
               variant="rectangular"
-              width={200}
-              height={350}
+              width={180}
+              height={330}
             />
            
           </Box>
