@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getFromLocalStorage } from "../localStorage/LocalStorage";
 
-const APIprefix = "http://localhost:5000";
+const APIprefix = process.env.BACK_END_URL;
 
 const tokenLocal = getFromLocalStorage("megaTechAuth");
 
@@ -83,9 +83,9 @@ function getRequests() {
 function postUser(signup) {
   const data = {
     name: "newUser",
-    email: "newUser@newUser.com",
+    email: "newUser@newUser.co7",
     password: "gege",
-    cpf: "12348948784",
+    cpf: "12348948789",
     phone: 1243758689,
   };
   console.log(signup)
