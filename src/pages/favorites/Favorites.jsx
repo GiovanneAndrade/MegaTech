@@ -24,7 +24,6 @@ const useStyles = makeStyles({
 function Favotites() {
   const classes = useStyles();
   const { favorities } = React.useContext(FavoritesContext);
-
   const myToken = getFromLocalStorage("megaTechAuth");
   return (
     <>
@@ -38,7 +37,7 @@ function Favotites() {
                   name={product?.name}
                   id={product?.id}
                   avaliações={product?.price}
-                  image={product?.image}
+                  images={product?.images}
                   description={product?.description}
                   quantity={product?.quantity}
                   isFavorite={true}
