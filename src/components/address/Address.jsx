@@ -20,7 +20,7 @@ export function AddAnddress() {
     waitAddress,
     setWaitAddress,
   } = React.useContext(AnddressContext);
-
+  console.log(waitAddress);
   function buscardistrict(cep) {
     axios
       .get(`https://viacep.com.br/ws/${cep}/json/`)
@@ -60,7 +60,10 @@ export function AddAnddress() {
   const { createAnddress } = AddAddress();
   return (
     <AddAnddressContainer>
-      <Grid container sx={{ width: { sm: "50%", xs: "100%" }, gap: "15px" }}>
+      <Grid
+        container
+        sx={{ width: { sm: "50%", xs: "100%" }, gap: "15px", height: "100%" }}
+      >
         <Grid item xs={12}>
           <TextField
             fullWidth
@@ -81,26 +84,29 @@ export function AddAnddress() {
             onChange={handleInputChange}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            label="city"
-            name="city"
-            variant="outlined"
-            value={myAnddress.city}
-            onChange={handleInputChange}
-          />
+        <Grid sx={{ width: "100%", display: "flex", gap: "10px" }}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="city"
+              name="city"
+              variant="outlined"
+              value={myAnddress.city}
+              onChange={handleInputChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="uf"
+              name="uf"
+              variant="outlined"
+              value={myAnddress.uf}
+              onChange={handleInputChange}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            label="uf"
-            name="uf"
-            variant="outlined"
-            value={myAnddress.uf}
-            onChange={handleInputChange}
-          />
-        </Grid>
+
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
@@ -139,7 +145,7 @@ export function AddAnddress() {
         {!waitAddress ? (
           <div className="message">carregando seus endereços...</div>
         ) : newAnddress.length === 0 ? (
-          "Não existe endereço cadastrado"
+          <div className="message">Não existe endereço cadastrado</div>
         ) : (
           <>
             <AddressSummary newAnddress={newAnddress} />

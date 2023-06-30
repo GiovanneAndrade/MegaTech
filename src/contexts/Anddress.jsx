@@ -15,7 +15,7 @@ export const AnddressProvider = (props) => {
     uf: "",
     cep: "",
   });
-console.log(newAnddress)
+ 
   useEffect(() => {
     const address = getAddress();
     setWaitAddress(false)
