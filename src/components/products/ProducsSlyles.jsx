@@ -34,7 +34,7 @@ export const ImageContainer = styled.div`
   border-radius: 5px 5px 5px 5px;
   img {
     padding: 10px;
-    max-width: 190px;
+    width: 120px;
     @media (max-width: 600px) {
       //padding: 35px;
      // max-width: 90px;

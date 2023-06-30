@@ -59,7 +59,7 @@ export const Products = ({
       setMyFavorities(id);
       if (hasError) {
         setChecked(false);
-        toast.success("Faça Login Primeiro!", {
+        toast.info("Faça Login Primeiro!", {
           className: "custom-toast",
         });
       }
@@ -68,7 +68,8 @@ export const Products = ({
       const hasError = await removeFavorites(id);
     }
   }
-  const image = images.length === 0 ? 'https://emdiabetes.com.br/wp-content/uploads/2017/09/breve.jpg' :images[0]?.url
+ 
+  const image = images?.length === 0 ? 'https://emdiabetes.com.br/wp-content/uploads/2017/09/breve.jpg' :images[0]?.url
   return (
     <ProductsContainer>
     
