@@ -16,12 +16,12 @@ export const AddAddress = () => {
     anddress
       .then((response) => {
         console.log(response.data);
-       if(wait) setWait(false);
+        setWait(false);
         setNewAnddress([...newAnddress, response.data]);
       })
       .catch((error) => {
         console.log(error.response.data.message);
-        if(wait) setWait(false);
+         setWait(false);
         toast.error("Erro ao criar endereço!");
       });
   }
