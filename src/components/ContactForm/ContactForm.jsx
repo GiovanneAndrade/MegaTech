@@ -39,11 +39,13 @@ export const ContactForm = ({ help }) => {
     setFormSubmitted,
     newContact,
   } = useHandleSubmit();
+  const { order } = React.useContext(OrderContext);
+  const newOrder = order?.map((item) => item?.products);
 
   return (
     <>
       {formSubmitted ? (
-        <>
+        <ContactSuccess>
           <Success
             message={"Obrigado pelo seu contato! Responderemos em breve."}
             icon={animationData}
@@ -54,11 +56,11 @@ export const ContactForm = ({ help }) => {
             justify="flex-start"
             style={{ width: "100%", display: "flex", justifyContent: "end" }}
           >
-            <Grid item>
+            <GridSuccess item>
               <Button onClick={newContact}>voltar</Button>
-            </Grid>
+            </GridSuccess>
           </Grid>
-        </>
+        </ContactSuccess>
       ) : (
         <Form onSubmit={handleSubmit} help={help}>
           <h2>Preencha o formulário de contato</h2>
@@ -111,9 +113,22 @@ export const ContactForm = ({ help }) => {
               onChange={(e) => setSelectedOrder(e.target.value)}
             >
               <MenuItem value="">Selecione o pedido</MenuItem>
-              <MenuItem value="Pedido 1">Pedido 1</MenuItem>
-              <MenuItem value="Pedido 2">Pedido 2</MenuItem>
-              <MenuItem value="Pedido 3">Pedido 3</MenuItem>
+              {newOrder
+                ?.filter((subArray) => subArray.some((item) => item.name !== ""))
+                ?.map((subArray, index) =>
+                  subArray.map(
+                    (item, subIndex) =>
+                      item.name && (
+                        <MenuItem
+                        sx={{maxWidth:300}}
+                          value={`Pedido ${index + 1}-${subIndex + 1}`}
+                          key={`${index}-${subIndex}`}
+                        >
+                          {item.name}
+                        </MenuItem>
+                      )
+                  )
+                )}
             </Select>
           </FormControl>
           <FormControl
@@ -176,9 +191,11 @@ export const ContactForm = ({ help }) => {
 
 import { useHandleSubmit } from "../../hooks/UseContact";
 import Success from "../lottie/Success";
+import { OrderContext } from "../../contexts/OrderContext";
 
 export const Form = styled.form`
   min-width: 40%;
+  max-width: 100%;
   gap: ${(props) => !props.help || "0"};
   h2 {
     margin: 20px 0;
@@ -186,10 +203,25 @@ export const Form = styled.form`
     font-size: ${(props) => !props.help || "15px"};
   }
   @media screen and (max-width: 768px) {
-    padding: ${(props) => !props.help? "0 20px":"0 1px" };
+    padding: ${(props) => (!props.help ? "0 20px" : "0 1px")};
   }
 `;
 
+export const GridSuccess = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top:40px;
+`
+export const ContactSuccess = styled(GridSuccess)`
+
+  height: 500px;
+  width: 500px;
+ 
+  flex-direction: column;
+ 
+`
 export const StyledTextField = styled(TextField)`
   ${({ help }) =>
     help &&
