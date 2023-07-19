@@ -212,9 +212,10 @@ export const ProductContainer = styled.div`
       }
 
       img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+         width: 300px;
+         
+         object-fit: cover;
+       
         @media (max-width: 600px) {
           max-width: 100%;
           max-height: 100%;

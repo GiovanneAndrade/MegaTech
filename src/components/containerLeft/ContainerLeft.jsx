@@ -83,7 +83,7 @@ export const ContainerLeft = () => {
   return (
     <ContainerLeftInternal>
       <FilterContainer>
-        <FilterHeader>Filter</FilterHeader>
+        <FilterHeader>Filtros</FilterHeader>
 
         <FilterOption>
           <FilterCheckbox
@@ -92,7 +92,7 @@ export const ContainerLeft = () => {
             id="price"
             onChange={handlePriceCheckboxChange}
           />
-          <FilterLabel htmlFor="price">Price</FilterLabel>
+          <FilterLabel htmlFor="price">preço</FilterLabel>
         </FilterOption>
         <FilterOption>
           <FilterCheckbox className="icon" type="checkbox" id="bestSellers" onChange={handlePriceOrderChange}/>

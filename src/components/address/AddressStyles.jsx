@@ -29,6 +29,7 @@ export const AddAnddressSummary = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
   @media screen and (max-width: 768px) {
     width: 100%;
