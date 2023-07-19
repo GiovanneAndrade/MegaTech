@@ -16,6 +16,7 @@ O aplicativo conta com uma API RESTful personalizada construída com NodeJS que 
 - **Wishlist**: Salvamento de produtos para futuras compras.
 - **Paginação**: Navegação amigável e eficiente pelo catálogo de produtos.
 - **Notificações**: Atualizações em tempo real sobre o status dos pedidos.
+- **Busca por CEP**: Insira o CEP e o sistema buscará o endereço automaticamente para agilizar o checkout.
 
 ## Tecnologias
 
@@ -45,7 +46,7 @@ npm i
 5. Execute o front-end com
 
 ```bash
-npm start
+npm run dev
 ```
 
 
