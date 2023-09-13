@@ -55,6 +55,7 @@ function MyCart() {
     handleDeleteItem,
     subtotal,
   } = useShoppingCart();
+  const maxLength = 40
   return (
     <>
       <Nav />
@@ -92,7 +93,8 @@ function MyCart() {
                   </ListItemAvatar>
                   <Box>
                     <ListItemText
-                      primary={item.name}
+                      primary={item.name.length > maxLength ? `${item.name.slice(0, maxLength)}...` : item.name}
+                     
                       secondary={`$${item.price}`}
                     />
                     <ResponsiveBox>

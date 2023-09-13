@@ -49,7 +49,7 @@ export const Products = ({
     }
   }, [favorities, id, isFavorite]);
 
- 
+
   const { createFavorites, removeFavorites } = useCreateFavorites();
 
   async function handleCheckboxChange() {
@@ -68,7 +68,7 @@ export const Products = ({
       const hasError = await removeFavorites(id);
     }
   }
- 
+  const maxLength = 30
   const image = images?.length === 0 ? 'https://emdiabetes.com.br/wp-content/uploads/2017/09/breve.jpg' :images[0]?.url
   return (
     <ProductsContainer>
@@ -86,7 +86,7 @@ export const Products = ({
             showProduct(name, avaliações, images, description, 1, id, category, stoke, productOverview)
           }
         >
-          {name}
+          {name.length > maxLength ? `${name.slice(0, maxLength)}...` : name}
         </h1>
 
         <p
