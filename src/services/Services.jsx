@@ -31,6 +31,9 @@ function getFavorities() {
   
   return axios.get(`${APIprefix}/favorities`, config);
 }
+function getHistoric() {
+  return axios.get(`${APIprefix}/historic`, config);
+}
 
 function postFavorities(id, userId) {
   const Favorities = {
@@ -142,5 +145,6 @@ export {
   postUser,
   postSignin,
   getSearch,
-  getPageCategories
+  getPageCategories,
+  getHistoric
 };
